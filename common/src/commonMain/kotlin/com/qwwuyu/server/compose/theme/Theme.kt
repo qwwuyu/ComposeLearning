@@ -115,9 +115,9 @@ enum class ColorPallet {
 }
 
 @Composable
-fun WidgetGalleryTheme(
+fun AppTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    colorPallet: ColorPallet = GREEN,
+    colorPallet: ColorPallet = BLUE,
     content: @Composable() () -> Unit,
 ) {
     val colors = when (colorPallet) {
