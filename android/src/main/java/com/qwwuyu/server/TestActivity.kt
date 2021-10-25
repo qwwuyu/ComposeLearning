@@ -1,7 +1,7 @@
 package com.qwwuyu.server
 
-import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.text.selection.DisableSelection
@@ -12,22 +12,20 @@ import com.qwwuyu.server.compose.nav.Nav
 import com.qwwuyu.server.compose.theme.AppTheme
 import com.qwwuyu.server.compose.utils.WLog
 
-class MainActivity : AppCompatActivity() {
+class TestActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val name = (intent?.getStringExtra("name")) ?: ""
         setContent {
             val nav = object : Nav {
                 override fun nav(path: String, name: String) {
-                    WLog.i("MainActivity nav")
-                    if (Nav.PATH_TEST == path) {
-                        startActivity(Intent(this@MainActivity, TestActivity::class.java).putExtra("name", name))
-                    }
+                    WLog.i("TestActivity nav")
                 }
             }
             CompositionLocalProvider(LocalNav provides nav) {
                 DisableSelection {
                     AppTheme {
-                        TestCompose("")
+                        TestCompose(name)
                     }
                 }
             }
