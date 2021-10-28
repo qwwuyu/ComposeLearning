@@ -20,7 +20,6 @@ import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowSize
 import androidx.compose.ui.window.WindowState
 import androidx.compose.ui.window.application
-import com.qwwuyu.server.compose.module.NavBean
 import com.qwwuyu.server.compose.module.test.TestCompose
 import com.qwwuyu.server.compose.nav.LocalNav
 import com.qwwuyu.server.compose.nav.Nav
@@ -40,12 +39,12 @@ fun main() = application {
             }
         })
 
-        val navList = remember { mutableStateListOf(NavBean("", "Main")) }
+        val navList = remember { mutableStateListOf<Nav.Path>(Nav.Path.Main) }
         val nav = object : Nav {
-            override fun nav(path: String, name: String) {
-                WLog.i("nav path=$path name=$name")
-                if (Nav.PATH_TEST == path) {
-                    navList.add(NavBean(path, name))
+            override fun nav(path: Nav.Path) {
+                WLog.i("nav path=$path")
+                if (path is Nav.Path.Test) {
+                    navList.add(path)
                 }
             }
         }
@@ -55,9 +54,8 @@ fun main() = application {
                     Column(Modifier.fillMaxSize()) {
                         TabView(navList)
                         Box(Modifier.weight(1f)) {
-                            val navBean = navList.last()
-                            when (navBean.path) {
-                                Nav.PATH_TEST -> TestCompose(navBean.name)
+                            when (val path = navList.last()) {
+                                is Nav.Path.Test -> TestCompose(path.name)
                                 else -> TestCompose("")
                             }
                         }
@@ -65,19 +63,21 @@ fun main() = application {
                 }
             }
         }
+
+
     }
 }
 
 @Composable
-fun TabView(navList: SnapshotStateList<NavBean>) {
+fun TabView(navList: SnapshotStateList<Nav.Path>) {
     Row(Modifier.horizontalScroll(rememberScrollState())) {
-        navList.forEachIndexed { index, navBean ->
+        navList.forEachIndexed { index, path ->
             var modifier = Modifier.fillMaxWidth().height(48.dp)
             if (index != navList.size - 1) {
                 modifier = modifier.clickable { navList.removeRange(index + 1, navList.size) }
             }
             Box(modifier = modifier) {
-                Text(navBean.name, fontSize = 12.sp, modifier = Modifier.padding(12.dp, 0.dp).align(Alignment.Center))
+                Text(path.path, fontSize = 12.sp, modifier = Modifier.padding(12.dp, 0.dp).align(Alignment.Center))
             }
         }
     }

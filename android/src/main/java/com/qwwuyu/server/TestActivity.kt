@@ -18,7 +18,7 @@ class TestActivity : AppCompatActivity() {
         val name = (intent?.getStringExtra("name")) ?: ""
         setContent {
             val nav = object : Nav {
-                override fun nav(path: String, name: String) {
+                override fun nav(path: Nav.Path) {
                     WLog.i("TestActivity nav")
                 }
             }

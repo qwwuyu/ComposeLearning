@@ -5,5 +5,10 @@ interface Nav {
         const val PATH_TEST = "test"
     }
 
-    fun nav(path: String, name: String)
+    sealed class Path(val path: String) {
+        object Main : Path("Main")
+        data class Test(val name: String) : Path("Test")
+    }
+
+    fun nav(path: Path)
 }

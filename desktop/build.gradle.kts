@@ -29,10 +29,15 @@ compose.desktop {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
             packageName = "com.qwwuyu.server"
             packageVersion = "1.0.0"
+            vendor = "qwwuyu"
+            description = "description"
+            copyright = "copyright"
 
             windows {
                 menu = true
+                shortcut = true
                 upgradeUuid = "334DE3FC-5D76-4A62-9E93-84E7ECC8B2F8"
+                installationPath = "D:/qwwuyu"
             }
         }
     }

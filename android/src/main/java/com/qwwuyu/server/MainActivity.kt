@@ -17,10 +17,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             val nav = object : Nav {
-                override fun nav(path: String, name: String) {
+                override fun nav(path: Nav.Path) {
                     WLog.i("MainActivity nav")
-                    if (Nav.PATH_TEST == path) {
-                        startActivity(Intent(this@MainActivity, TestActivity::class.java).putExtra("name", name))
+                    if (path is Nav.Path.Test) {
+                        startActivity(Intent(this@MainActivity, TestActivity::class.java).putExtra("name", path.name))
                     }
                 }
             }

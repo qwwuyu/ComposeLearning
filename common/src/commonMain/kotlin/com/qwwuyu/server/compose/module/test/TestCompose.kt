@@ -20,6 +20,7 @@ import com.qwwuyu.server.compose.nav.rememberNav
 fun TestCompose(type: String) {
     Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.background) {
         when (type) {
+            CTest.NAME -> CTest.main()
             CText.NAME -> CText.main()
             CScaffold.NAME -> CScaffold.main()
             CScroll.NAME -> CScroll.main()
@@ -31,6 +32,7 @@ fun TestCompose(type: String) {
 @Composable
 fun TestScreenCompose() {
     Column(Modifier.verticalScroll(rememberScrollState())) {
+        TestTextCompose(CTest.NAME)
         TestTextCompose(CText.NAME)
         TestTextCompose(CScaffold.NAME)
         TestTextCompose(CScroll.NAME)
@@ -41,7 +43,7 @@ fun TestScreenCompose() {
 fun TestTextCompose(title: String) {
     val nav = rememberNav()
     Box(modifier = Modifier.fillMaxWidth().height(48.dp).clickable {
-        nav.nav(Nav.PATH_TEST, title)
+        nav.nav(Nav.Path.Test(title))
     }) {
         Text(text = title, modifier = Modifier.align(Alignment.CenterStart).padding(16.dp, 0.dp))
     }
