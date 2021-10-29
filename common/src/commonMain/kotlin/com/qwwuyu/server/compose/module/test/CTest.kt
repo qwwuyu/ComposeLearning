@@ -14,8 +14,6 @@ import androidx.compose.ui.unit.dp
 
 class CTest {
     companion object {
-        val NAME = CTest::class.simpleName ?: ""
-
         @Composable
         fun main() {
             CTestMain()
@@ -40,4 +38,6 @@ fun CTestMain() {
             )
         }
     }
+
+
 }

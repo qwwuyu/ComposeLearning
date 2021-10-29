@@ -5,8 +5,6 @@ import androidx.compose.runtime.Composable
 
 class CText {
     companion object {
-        val NAME = CText::class.simpleName ?: ""
-
         @Composable
         fun main() {
             CTextMain()

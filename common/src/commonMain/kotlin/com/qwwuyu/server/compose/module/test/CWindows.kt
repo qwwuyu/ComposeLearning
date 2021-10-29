@@ -5,8 +5,6 @@ import com.qwwuyu.server.compose.platform.WinApi
 
 class CWindows {
     companion object {
-        val NAME = CWindows::class.simpleName ?: ""
-
         @Composable
         fun main() {
             CWindowsMain()

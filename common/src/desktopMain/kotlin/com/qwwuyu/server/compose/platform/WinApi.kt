@@ -1,14 +1,13 @@
 package com.qwwuyu.server.compose.platform
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.Checkbox
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.SettingsPhone
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -19,18 +18,19 @@ import androidx.compose.ui.window.*
 import com.qwwuyu.server.compose.module.test.SelectTab
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.flow.*
+import java.io.File
 import java.nio.file.Path
 
 @Composable
 actual fun WinApi() {
     Column(Modifier.fillMaxSize()) {
-        val text = SelectTab(listOf("Window"))
+        val text = SelectTab(listOf("Window", "Window2", "file"))
         Box(Modifier.weight(1f)) {
             when (text) {
                 "Window" -> CWindow()
+                "Window2" -> Window(onCloseRequest = { }, undecorated = true) {}
+                "file" -> CFile()
             }
         }
     }
@@ -44,6 +44,7 @@ fun CWindow() {
     var menuState by remember { mutableStateOf(true) }
     var file by remember { mutableStateOf("选择文件") }
     var saveState by remember { mutableStateOf("保存文件") }
+    var isVisible by remember { mutableStateOf(true) }
 
     LaunchedEffect(Unit) {
         notifications.collect { saveState = it }
@@ -72,7 +73,7 @@ fun CWindow() {
         }
 
         val tray = TrayState()
-        val state = WindowState()
+        val state = rememberWindowState()
         val image = Icons.Default.SettingsPhone
         val painter = rememberVectorPainter(
             defaultWidth = image.defaultWidth,
@@ -85,16 +86,17 @@ fun CWindow() {
             content = { _, _ -> RenderVectorGroup(group = image.root) }
         )
 
+        if (trayState) {
+            Tray(painter, state = tray, hint = "hint qwwuyu", menu = { ApplicationMenu { exit() } })
+        }
 
         Window(
             state = state,
             title = "title",
             icon = painter,
+            visible = isVisible,
             onCloseRequest = { exit() }
         ) {
-            if (trayState) {
-                Tray(painter, state = tray, hint = "hint qwwuyu", menu = { ApplicationMenu { exit() } })
-            }
 
             if (menuState) {
                 WindowMenuBar { exit() }
@@ -102,16 +104,50 @@ fun CWindow() {
 
             Column(Modifier.fillMaxSize()) {
                 Text("全屏控制", Modifier.clickable {
-                    state.placement = if (state.placement == WindowPlacement.Fullscreen)
-                        WindowPlacement.Floating else WindowPlacement.Fullscreen
+                    state.placement = when (state.placement) {
+                        WindowPlacement.Fullscreen -> WindowPlacement.Maximized
+                        WindowPlacement.Maximized -> WindowPlacement.Floating
+                        WindowPlacement.Floating -> WindowPlacement.Fullscreen
+                    }
                 })
                 Text("退出", Modifier.clickable { exit() })
                 Text(file, Modifier.clickable { file() })
                 Text(saveState, Modifier.clickable { save() })
                 Text("菜单", Modifier.clickable { menuState = !menuState })
+                Text("隐藏", Modifier.clickable { isVisible = !isVisible }.height(0.dp))
                 Text("托盘", Modifier.clickable { trayState = !trayState }.height(0.dp))
                 Text("托盘通知",
                     Modifier.clickable { tray.sendNotification(Notification("title", "msg", Notification.Type.Info)) })
+
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Checkbox(state.isMinimized, { state.isMinimized = !state.isMinimized })
+                    Text("最小化")
+                }
+                Text(
+                    "位移 ${state.position}",
+                    Modifier.clickable {
+                        val position = state.position
+                        if (position is WindowPosition.Absolute) {
+                            state.position = position.copy(x = state.position.x + 10.dp)
+                        }
+                    }
+                )
+                Text(
+                    "大小 ${state.size}",
+                    Modifier.clickable {
+                        state.size = state.size.copy(width = state.size.width + 10.dp)
+                    }
+                )
+                LaunchedEffect(state) {
+                    snapshotFlow { state.size }
+                        .onEach { println(it) }
+                        .launchIn(this)
+
+                    snapshotFlow { state.position }
+//                        .filterNot { it.isSpecified }
+                        .onEach { println(it) }
+                        .launchIn(this)
+                }
             }
 
             if (fileDialog.isAwaiting) {
@@ -141,7 +177,7 @@ fun CWindow() {
     }
 }
 
-var _notifications = Channel<String>(0)
+private var _notifications = Channel<String>(0)
 val notifications: Flow<String> get() = _notifications.receiveAsFlow()
 
 private suspend fun ask(exitDialog: DialogState<AlertDialogResult>): Boolean {
@@ -179,6 +215,10 @@ private fun FrameWindowScope.WindowMenuBar(exit: () -> Unit) = MenuBar {
     Menu("Menu1") {
         Item("Exit", onClick = { exit() })
         Item("Exit", onClick = { exit() })
+        Menu("2级") {
+            Item("Exit", onClick = { exit() })
+            Item("Exit", onClick = { exit() })
+        }
     }
     Menu("Settings") {
         Item("Exit1", onClick = { exit() })
@@ -193,4 +233,12 @@ private fun Path.launchSaving(text: String) = GlobalScope.launch {
 
 private suspend fun Path.writeTextAsync(text: String) = withContext(Dispatchers.IO) {
     toFile().writeText(text)
+}
+
+/* ========================  ======================== */
+@OptIn(ExperimentalComposeUiApi::class)
+@Composable
+fun CFile() {
+    val resourcesDir = File(System.getProperty("compose.application.resources.dir"))
+    println(resourcesDir)
 }

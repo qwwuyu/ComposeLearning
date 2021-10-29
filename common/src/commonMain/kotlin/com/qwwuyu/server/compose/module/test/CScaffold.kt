@@ -13,8 +13,6 @@ import kotlinx.coroutines.launch
 
 class CScaffold {
     companion object {
-        val NAME = CScaffold::class.simpleName ?: ""
-
         @Composable
         fun main() {
             CScaffoldMain()

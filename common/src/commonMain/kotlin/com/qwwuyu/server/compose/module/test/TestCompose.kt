@@ -17,11 +17,12 @@ import com.qwwuyu.server.compose.nav.rememberNav
 fun TestCompose(type: String) {
     Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colors.background) {
         when (type) {
-            CTest.NAME -> CTest.main()
-            CText.NAME -> CText.main()
-            CScaffold.NAME -> CScaffold.main()
-            CScroll.NAME -> CScroll.main()
-            CWindows.NAME -> CWindows.main()
+            "CTest" -> CTest.main()
+            "CWindows" -> CWindows.main()
+            "CText" -> CText.main()
+            "CEdit" -> CEdit.main()
+            "CScaffold" -> CScaffold.main()
+            "CScroll" -> CScroll.main()
             else -> TestScreenCompose()
         }
     }
@@ -30,11 +31,9 @@ fun TestCompose(type: String) {
 @Composable
 fun TestScreenCompose() {
     Column(Modifier.verticalScroll(rememberScrollState())) {
-        TestTextCompose(CTest.NAME)
-        TestTextCompose(CText.NAME)
-        TestTextCompose(CScaffold.NAME)
-        TestTextCompose(CScroll.NAME)
-        TestTextCompose(CWindows.NAME)
+        for (text in arrayOf("CTest", "CWindows", "CText", "CEdit", "CScaffold", "CScroll")) {
+            TestTextCompose(text)
+        }
     }
 }
 

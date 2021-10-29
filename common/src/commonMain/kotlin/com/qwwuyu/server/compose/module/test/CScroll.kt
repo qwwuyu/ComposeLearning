@@ -13,8 +13,6 @@ import androidx.compose.ui.Modifier
 
 class CScroll {
     companion object {
-        val NAME = CScroll::class.simpleName ?: ""
-
         @Composable
         fun main() {
             Column(Modifier.fillMaxSize()) {
