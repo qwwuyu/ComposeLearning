@@ -22,6 +22,6 @@ android {
 }
 
 dependencies {
-    implementation(project(":common"))
+    implementation(project(":common:main"))
     implementation("androidx.activity:activity-compose:1.3.0")
 }
