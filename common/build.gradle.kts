@@ -28,6 +28,7 @@ kotlin {
         named("desktopMain") {
             dependencies {
                 api(compose.desktop.common)
+                implementation(compose.desktop.currentOs)
             }
         }
     }

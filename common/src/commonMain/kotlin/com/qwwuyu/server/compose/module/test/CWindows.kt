@@ -1,20 +1,20 @@
 package com.qwwuyu.server.compose.module.test
 
-import androidx.compose.material.Text
-import androidx.compose.material.Button
 import androidx.compose.runtime.Composable
+import com.qwwuyu.server.compose.platform.WinApi
 
-class CFile {
+class CWindows {
     companion object {
-        val NAME = CText::class.simpleName ?: ""
+        val NAME = CWindows::class.simpleName ?: ""
 
         @Composable
         fun main() {
-            CFileMain()
+            CWindowsMain()
         }
     }
 }
 
 @Composable
-fun CFileMain() {
+fun CWindowsMain() {
+    WinApi()
 }

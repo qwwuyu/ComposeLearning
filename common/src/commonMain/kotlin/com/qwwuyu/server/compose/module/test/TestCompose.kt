@@ -1,10 +1,7 @@
 package com.qwwuyu.server.compose.module.test
 
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -24,6 +21,7 @@ fun TestCompose(type: String) {
             CText.NAME -> CText.main()
             CScaffold.NAME -> CScaffold.main()
             CScroll.NAME -> CScroll.main()
+            CWindows.NAME -> CWindows.main()
             else -> TestScreenCompose()
         }
     }
@@ -36,6 +34,7 @@ fun TestScreenCompose() {
         TestTextCompose(CText.NAME)
         TestTextCompose(CScaffold.NAME)
         TestTextCompose(CScroll.NAME)
+        TestTextCompose(CWindows.NAME)
     }
 }
 
@@ -51,10 +50,11 @@ fun TestTextCompose(title: String) {
 
 @Composable
 fun SelectTab(textList: List<String>): String {
-    var text by remember { mutableStateOf("vertical") }
+    var text by remember { mutableStateOf("") }
     Row(Modifier.horizontalScroll(rememberScrollState())) {
         textList.forEach {
-            val modifier = if (text == it) Modifier else Modifier
+            val modifier = if (text == it) Modifier
+            else Modifier.background(color = MaterialTheme.colors.primaryVariant)
             Button(onClick = { text = it }, modifier = modifier) { Text(it) }
         }
     }
