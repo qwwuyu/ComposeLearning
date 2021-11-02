@@ -17,9 +17,6 @@ kotlin {
                 api(compose.foundation)
                 api(compose.material)
                 api(compose.materialIconsExtended)
-
-                api(project(":common:base"))
-                api(project(":common:mmkv"))
             }
         }
         named("androidMain") {
@@ -31,7 +28,7 @@ kotlin {
         named("desktopMain") {
             dependencies {
                 api(compose.desktop.common)
-                implementation(compose.desktop.currentOs)
+                api(compose.desktop.currentOs)
             }
         }
     }

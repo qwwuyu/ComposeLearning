@@ -2,6 +2,8 @@ package com.qwwuyu.server.compose.platform
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Checkbox
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
@@ -239,6 +241,8 @@ private suspend fun Path.writeTextAsync(text: String) = withContext(Dispatchers.
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun CFile() {
-    val resourcesDir = File(System.getProperty("compose.application.resources.dir"))
-    println(resourcesDir)
+    Column(Modifier.verticalScroll(rememberScrollState()).fillMaxSize()) {
+        val properties = System.getProperties()
+        Text(properties.map { "${it.key} :: ${it.value}" }.joinToString("\n\n"))
+    }
 }

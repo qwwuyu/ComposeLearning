@@ -13,6 +13,7 @@ kotlin {
     sourceSets {
         named("commonMain") {
             dependencies {
+                implementation(project(":common:base"))
                 api("com.tencent:mmkv-static:1.2.11")
             }
         }

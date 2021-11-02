@@ -23,6 +23,9 @@ fun TestCompose(type: String) {
             "CEdit" -> CEdit.main()
             "CScaffold" -> CScaffold.main()
             "CScroll" -> CScroll.main()
+            "CTheme" -> CTheme.main()
+            "CNav" -> CNav.main()
+            "CSql" -> CSql.main()
             else -> TestScreenCompose()
         }
     }
@@ -31,7 +34,17 @@ fun TestCompose(type: String) {
 @Composable
 fun TestScreenCompose() {
     Column(Modifier.verticalScroll(rememberScrollState())) {
-        for (text in arrayOf("CTest", "CWindows", "CText", "CEdit", "CScaffold", "CScroll")) {
+        for (text in arrayOf(
+            "CTest",
+            "CWindows",
+            "CText",
+            "CEdit",
+            "CScaffold",
+            "CScroll",
+            "CThemeMain",
+            "CNav",
+            "CSql"
+        )) {
             TestTextCompose(text)
         }
     }
