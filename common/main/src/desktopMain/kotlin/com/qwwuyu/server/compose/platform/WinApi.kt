@@ -21,7 +21,6 @@ import com.qwwuyu.server.compose.module.test.SelectTab
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
-import java.io.File
 import java.nio.file.Path
 
 @Composable
@@ -42,7 +41,6 @@ actual fun WinApi() {
 @Composable
 fun CWindow() {
     var exit by remember { mutableStateOf(true) }
-    var trayState by mutableStateOf(true)
     var menuState by remember { mutableStateOf(true) }
     var file by remember { mutableStateOf("选择文件") }
     var saveState by remember { mutableStateOf("保存文件") }
@@ -88,10 +86,6 @@ fun CWindow() {
             content = { _, _ -> RenderVectorGroup(group = image.root) }
         )
 
-        if (trayState) {
-            Tray(painter, state = tray, hint = "hint qwwuyu", menu = { ApplicationMenu { exit() } })
-        }
-
         Window(
             state = state,
             title = "title",
@@ -117,7 +111,6 @@ fun CWindow() {
                 Text(saveState, Modifier.clickable { save() })
                 Text("菜单", Modifier.clickable { menuState = !menuState })
                 Text("隐藏", Modifier.clickable { isVisible = !isVisible }.height(0.dp))
-                Text("托盘", Modifier.clickable { trayState = !trayState }.height(0.dp))
                 Text("托盘通知",
                     Modifier.clickable { tray.sendNotification(Notification("title", "msg", Notification.Type.Info)) })
 

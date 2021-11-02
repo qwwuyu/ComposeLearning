@@ -1,22 +1,20 @@
 package com.qwwuyu.server.compose.platform
 
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.ImageBitmap
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.imageResource
-import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.res.painterResource
 import com.qwwuyu.server.compose.R
 
 @Composable
-actual fun imageResource(res: String): ImageBitmap {
+actual fun imageResource(res: String): Painter {
     val id = drawableId(res)
-    return ImageBitmap.imageResource(id)
+    return painterResource(id)
 }
 
 @Composable
-actual fun vectorResource(res: String): ImageVector {
+actual fun vectorResource(res: String): Painter {
     val id = drawableId(res)
-    return ImageVector.vectorResource(id)
+    return painterResource(id)
 }
 
 // TODO: improve resource loading

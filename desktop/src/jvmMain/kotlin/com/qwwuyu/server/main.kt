@@ -6,25 +6,23 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.selection.DisableSelection
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.RenderVectorGroup
+import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.ui.window.Window
-import androidx.compose.ui.window.WindowSize
-import androidx.compose.ui.window.WindowState
-import androidx.compose.ui.window.application
+import androidx.compose.ui.window.*
 import com.qwwuyu.server.compose.module.test.TestCompose
 import com.qwwuyu.server.compose.nav.LocalNav
 import com.qwwuyu.server.compose.nav.Nav
 import com.qwwuyu.server.compose.theme.AppTheme
 import com.qwwuyu.server.compose.utils.WLog
+import kotlinx.coroutines.launch
 
 fun main() = application {
     Window(
@@ -79,4 +77,14 @@ fun TabView(navList: SnapshotStateList<Nav.Path>) {
             }
         }
     }
+}
+
+
+@Composable
+private fun ApplicationScope.ApplicationTray(state: TrayState) {
+    Tray(
+        icon = painterResource("drawable-nodpi/icon.png"),
+        state = TrayState(),
+        tooltip = "hint qwwuyu",
+        menu = { })
 }
