@@ -41,6 +41,7 @@ compose.desktop {
                 // see https://wixtoolset.org/documentation/manual/v3/howtos/general/generate_guids.html
                 upgradeUuid = "334DE3FC-5D76-4A62-9E93-84E7ECC8B2F8"
                 installationPath = "qwwuyu"
+                iconFile.set(project.file("icon.ico"))
             }
         }
     }
