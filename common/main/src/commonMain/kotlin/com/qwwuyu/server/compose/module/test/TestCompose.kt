@@ -21,11 +21,18 @@ fun TestCompose(type: String) {
             "CWindows" -> CWindows.main()
             "CText" -> CText.main()
             "CEdit" -> CEdit.main()
+            "CButton" -> CButton.main()
             "CScaffold" -> CScaffold.main()
             "CScroll" -> CScroll.main()
+            "CLoading" -> CLoading.main()
+            "CToggle" -> CToggle.main()
+            "CView" -> CView.main()
             "CTheme" -> CTheme.main()
+            "CNet" -> CNet.main()
+            "CImage" -> CImage.main()
             "CNav" -> CNav.main()
             "CSql" -> CSql.main()
+            "CKV" -> CKV.main()
             else -> TestScreenCompose()
         }
     }
@@ -39,11 +46,18 @@ fun TestScreenCompose() {
             "CWindows",
             "CText",
             "CEdit",
+            "CButton",
             "CScaffold",
             "CScroll",
-            "CThemeMain",
+            "CLoading",
+            "CToggle",
+            "CView",
+            "CTheme",
+            "CNet",
+            "CImage",
             "CNav",
-            "CSql"
+            "CSql",
+            "CKV",
         )) {
             TestTextCompose(text)
         }

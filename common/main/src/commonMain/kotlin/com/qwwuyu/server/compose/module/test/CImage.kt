@@ -3,16 +3,16 @@ package com.qwwuyu.server.compose.module.test
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 
-class CKV {
+class CImage {
     companion object {
         @Composable
         fun main() {
-            CKVMain()
+            CImageMain()
         }
     }
 }
 
 @Composable
-fun CKVMain() {
-    Text("CKV")
+fun CImageMain() {
+    Text("CImage")
 }

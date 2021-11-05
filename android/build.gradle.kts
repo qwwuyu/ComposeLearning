@@ -5,14 +5,15 @@ plugins {
 }
 
 android {
-    compileSdkVersion(30)
+    compileSdk = 31
 
     defaultConfig {
         applicationId = "com.qwwuyu.server"
-        minSdkVersion(26)
-        targetSdkVersion(30)
+        minSdk = 23
+        targetSdk = 30
         versionCode = 1
         versionName = "1.0.0"
+        ndkVersion = "23.1.7779620"
     }
 
     compileOptions {

@@ -6,6 +6,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 
+expect val MARGIN_SCROLLBAR: Dp
+
 @Composable
 expect fun VerticalScrollbar(
     modifier: Modifier,
@@ -15,7 +17,17 @@ expect fun VerticalScrollbar(
 @Composable
 expect fun VerticalScrollbar(
     modifier: Modifier,
-    scrollState: LazyListState,
-    itemCount: Int,
-    averageItemSize: Dp
+    scrollState: LazyListState
+)
+
+@Composable
+expect fun HorizontalScrollbar(
+    modifier: Modifier,
+    scrollState: LazyListState
+)
+
+@Composable
+expect fun HorizontalScrollbar(
+    modifier: Modifier,
+    scrollState: ScrollState
 )

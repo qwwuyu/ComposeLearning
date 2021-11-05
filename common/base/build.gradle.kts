@@ -35,11 +35,11 @@ kotlin {
 }
 
 android {
-    compileSdkVersion(30)
+    compileSdk = 31
 
     defaultConfig {
-        minSdkVersion(26)
-        targetSdkVersion(30)
+        minSdk = 23
+        targetSdk = 30
     }
 
     compileOptions {
