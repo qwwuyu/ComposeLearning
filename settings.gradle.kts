@@ -1,1 +1,1 @@
-include(":common:base", ":common:mmkv", ":common:main", ":android", ":desktop")
+include(":common:base", ":common:main", ":android", ":desktop")

@@ -19,7 +19,6 @@ kotlin {
                 api(compose.materialIconsExtended)
 
                 api(project(":common:base"))
-                api(project(":common:mmkv"))
             }
         }
         named("androidMain") {
