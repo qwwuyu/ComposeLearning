@@ -17,6 +17,7 @@ kotlin {
                 api(compose.foundation)
                 api(compose.material)
                 api(compose.materialIconsExtended)
+                api(compose.uiTooling)
 
                 api(project(":common:base"))
             }
@@ -31,6 +32,7 @@ kotlin {
             dependencies {
                 api(compose.desktop.common)
                 implementation(compose.desktop.currentOs)
+                implementation(compose.desktop.components.splitPane)
             }
         }
     }

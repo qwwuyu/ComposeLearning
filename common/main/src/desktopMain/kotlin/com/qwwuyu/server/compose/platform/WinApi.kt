@@ -5,6 +5,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Checkbox
+import androidx.compose.material.DropdownMenu
+import androidx.compose.material.DropdownMenuItem
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.SettingsPhone
@@ -21,17 +23,34 @@ import com.qwwuyu.server.compose.module.test.SelectTab
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
+import org.jetbrains.compose.splitpane.ExperimentalSplitPaneApi
+import org.jetbrains.compose.splitpane.HorizontalSplitPane
+import java.awt.Desktop
+import java.io.File
+import java.net.URI
 import java.nio.file.Path
 
 @Composable
 actual fun WinApi() {
     Column(Modifier.fillMaxSize()) {
-        val text = SelectTab(listOf("Window", "Window2", "file"))
+        val text = SelectTab(
+            listOf(
+                "Window", "Window2", "file", "splitPane",
+                "desktop open", "desktop browse", "DropdownMenu"
+            )
+        )
         Box(Modifier.weight(1f)) {
             when (text) {
                 "Window" -> CWindow()
                 "Window2" -> Window(onCloseRequest = { }, undecorated = true) {}
                 "file" -> CFile()
+                "splitPane" -> @OptIn(ExperimentalSplitPaneApi::class) HorizontalSplitPane {
+                    first(minSize = 30.dp) { Text("left") }
+                    second { Text("right") }
+                }
+                "desktop open" -> Desktop.getDesktop().open(File("D://"))
+                "desktop browse" -> Desktop.getDesktop().browse(URI.create("www.baidu.com"))
+                "DropdownMenu" -> CDropdownMenu()
             }
         }
     }
@@ -237,5 +256,20 @@ fun CFile() {
     Column(Modifier.verticalScroll(rememberScrollState()).fillMaxSize()) {
         val properties = System.getProperties()
         Text(properties.map { "${it.key} :: ${it.value}" }.joinToString("\n\n"))
+    }
+}
+
+/* ========================  ======================== */
+@Composable
+fun CDropdownMenu() {
+    var isExpand by remember { mutableStateOf(true) }
+    DropdownMenu(isExpand, onDismissRequest = { isExpand = false }) {
+        DropdownMenuItem(onClick = { isExpand = false }) {
+            Text("123")
+        }
+        DropdownMenuItem(onClick = { isExpand = false }) {
+            Text("234")
+        }
+        Text("456")
     }
 }
