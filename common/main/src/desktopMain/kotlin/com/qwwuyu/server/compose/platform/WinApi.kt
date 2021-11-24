@@ -4,11 +4,9 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Checkbox
-import androidx.compose.material.DropdownMenu
-import androidx.compose.material.DropdownMenuItem
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.SettingsPhone
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -20,6 +18,7 @@ import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.*
 import com.qwwuyu.server.compose.module.test.SelectTab
+import com.qwwuyu.server.compose.utils.WLog
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
@@ -36,7 +35,7 @@ actual fun WinApi() {
         val text = SelectTab(
             listOf(
                 "Window", "Window2", "file", "splitPane",
-                "desktop open", "desktop browse", "DropdownMenu"
+                "desktop open", "desktop browse", "DropdownMenu", "CDialog"
             )
         )
         Box(Modifier.weight(1f)) {
@@ -51,6 +50,7 @@ actual fun WinApi() {
                 "desktop open" -> Desktop.getDesktop().open(File("D://"))
                 "desktop browse" -> Desktop.getDesktop().browse(URI.create("www.baidu.com"))
                 "DropdownMenu" -> CDropdownMenu()
+                "CDialog" -> CDialog()
             }
         }
     }
@@ -271,5 +271,20 @@ fun CDropdownMenu() {
             Text("234")
         }
         Text("456")
+    }
+}
+
+/* ========================  ======================== */
+@Composable
+fun CDialog() {
+    var isShow by remember { mutableStateOf(true) }
+    if (isShow) {
+        Dialog(onCloseRequest = { WLog.i("onCloseRequest") }) {
+            Button(
+                onClick = { isShow = false }
+            ) {
+                Icon(Icons.Default.Close, null)
+            }
+        }
     }
 }
