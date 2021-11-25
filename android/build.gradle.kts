@@ -5,14 +5,14 @@ plugins {
 }
 
 android {
-    compileSdk = 31
+    compileSdkVersion(Apps.compileSdkVersion)
 
     defaultConfig {
-        applicationId = "com.qwwuyu.server"
-        minSdk = 23
-        targetSdk = 30
-        versionCode = 1
-        versionName = "1.0.0"
+        applicationId = Apps.applicationId
+        minSdkVersion(Apps.minSdkVersion)
+        targetSdkVersion(Apps.targetSdkVersion)
+        versionCode = Apps.code
+        versionName = Apps.version
         ndkVersion = "23.1.7779620"
     }
 
@@ -20,9 +20,13 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
+    packagingOptions {
+        exclude("META-INF/*")
+    }
 }
 
 dependencies {
     implementation(project(":common:main"))
-    implementation("androidx.activity:activity-compose:1.3.0")
+    implementation(Deps.AndroidX.Activity.activityCompose)
 }
