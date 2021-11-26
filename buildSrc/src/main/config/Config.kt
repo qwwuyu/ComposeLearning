@@ -39,15 +39,19 @@ object Versions {
     const val compose = "1.0.0-beta5"
     const val androidTools = "4.2.0"
 
+    const val appcompat = "1.3.1"
+    const val activityCompose = "1.3.0"
+
+    const val MVIKotlin = "3.0.0-alpha01"
+    const val decompose = "0.3.1"
+    const val reaktive = "1.1.22"
+    const val SQLDelight = "1.5.0"
+
     const val okhttp3 = "3.14.9"
     const val retrofit = "2.9.0"
 }
 
 fun kotlinx(id: String, version: String) = "org.jetbrains.kotlinx:kotlinx-$id:$version"
-
-object Libs {
-    const val junit = "junit:junit:4.13.1"
-}
 
 object Deps {
     object JetBrains {
@@ -68,50 +72,45 @@ object Deps {
 
     object AndroidX {
         object AppCompat {
-            const val appCompat = "androidx.appcompat:appcompat:1.3.1"
+            const val appCompat = "androidx.appcompat:appcompat:${Versions.appcompat}"
         }
 
         object Activity {
-            const val activityCompose = "androidx.activity:activity-compose:1.3.0"
+            const val activityCompose = "androidx.activity:activity-compose:${Versions.activityCompose}"
         }
     }
 
     object ArkIvanov {
         object MVIKotlin {
-            private const val VERSION = "3.0.0-alpha01"
-            const val rx = "com.arkivanov.mvikotlin:rx:$VERSION"
-            const val mvikotlin = "com.arkivanov.mvikotlin:mvikotlin:$VERSION"
-            const val mvikotlinMain = "com.arkivanov.mvikotlin:mvikotlin-main:$VERSION"
-            const val mvikotlinLogging = "com.arkivanov.mvikotlin:mvikotlin-logging:$VERSION"
-            const val mvikotlinTimeTravel = "com.arkivanov.mvikotlin:mvikotlin-timetravel:$VERSION"
-            const val mvikotlinExtensionsReaktive = "com.arkivanov.mvikotlin:mvikotlin-extensions-reaktive:$VERSION"
+            const val rx = "com.arkivanov.mvikotlin:rx:${Versions.MVIKotlin}"
+            const val mvikotlin = "com.arkivanov.mvikotlin:mvikotlin:${Versions.MVIKotlin}"
+            const val mvikotlinMain = "com.arkivanov.mvikotlin:mvikotlin-main:${Versions.MVIKotlin}"
+            const val logging = "com.arkivanov.mvikotlin:mvikotlin-logging:${Versions.MVIKotlin}"
+            const val timeTravel = "com.arkivanov.mvikotlin:mvikotlin-timetravel:${Versions.MVIKotlin}"
+            const val extensionsReaktive = "com.arkivanov.mvikotlin:mvikotlin-extensions-reaktive:${Versions.MVIKotlin}"
         }
 
         object Decompose {
-            private const val VERSION = "0.3.1"
-            const val decompose = "com.arkivanov.decompose:decompose:$VERSION"
-            const val extensionsCompose = "com.arkivanov.decompose:extensions-compose-jetbrains:$VERSION"
+            const val decompose = "com.arkivanov.decompose:decompose:${Versions.decompose}"
+            const val extensionsCompose = "com.arkivanov.decompose:extensions-compose-jetbrains:${Versions.decompose}"
         }
     }
 
     object Badoo {
         object Reaktive {
-            private const val VERSION = "1.1.22"
-            const val reaktive = "com.badoo.reaktive:reaktive:$VERSION"
-            const val reaktiveTesting = "com.badoo.reaktive:reaktive-testing:$VERSION"
-            const val utils = "com.badoo.reaktive:utils:$VERSION"
-            const val coroutinesInterop = "com.badoo.reaktive:coroutines-interop:$VERSION"
+            const val reaktive = "com.badoo.reaktive:reaktive:${Versions.reaktive}"
+            const val reaktiveTesting = "com.badoo.reaktive:reaktive-testing:${Versions.reaktive}"
+            const val utils = "com.badoo.reaktive:utils:${Versions.reaktive}"
+            const val coroutinesInterop = "com.badoo.reaktive:coroutines-interop:${Versions.reaktive}"
         }
     }
 
     object Squareup {
         object SQLDelight {
-            private const val VERSION = "1.5.0"
-
-            const val gradlePlugin = "com.squareup.sqldelight:gradle-plugin:$VERSION"
-            const val androidDriver = "com.squareup.sqldelight:android-driver:$VERSION"
-            const val sqliteDriver = "com.squareup.sqldelight:sqlite-driver:$VERSION"
-            const val nativeDriver = "com.squareup.sqldelight:native-driver:$VERSION"
+            const val gradlePlugin = "com.squareup.sqldelight:gradle-plugin:${Versions.SQLDelight}"
+            const val androidDriver = "com.squareup.sqldelight:android-driver:${Versions.SQLDelight}"
+            const val sqliteDriver = "com.squareup.sqldelight:sqlite-driver:${Versions.SQLDelight}"
+            const val nativeDriver = "com.squareup.sqldelight:native-driver:${Versions.SQLDelight}"
         }
     }
 }
