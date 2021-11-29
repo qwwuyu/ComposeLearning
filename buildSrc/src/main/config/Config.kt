@@ -43,7 +43,7 @@ object Versions {
     const val activityCompose = "1.3.0"
 
     const val MVIKotlin = "3.0.0-alpha01"
-    const val decompose = "0.3.1"
+    const val decompose = "0.4.0"
     const val reaktive = "1.1.22"
     const val SQLDelight = "1.5.0"
 

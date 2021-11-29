@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 plugins {
     id("multiplatform-compose-setup")
     id("android-setup")
+    id("kotlin-parcelize")
 }
 
 kotlin {
