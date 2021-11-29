@@ -1,1 +1,10 @@
-include(":common:base", ":common:main", ":android", ":desktop")
+include(
+    ":common:base",
+    ":common:database",
+    ":common:router",
+    ":common:home",
+    ":common:tkv",
+    ":common:main",
+    ":android",
+    ":desktop"
+)

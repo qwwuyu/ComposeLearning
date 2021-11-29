@@ -29,4 +29,8 @@ android {
 dependencies {
     implementation(project(":common:main"))
     implementation(Deps.AndroidX.Activity.activityCompose)
+
+    implementation(Deps.ArkIvanov.MVIKotlin.mvikotlinMain)
+    implementation(Deps.ArkIvanov.MVIKotlin.logging)
+    implementation(Deps.ArkIvanov.MVIKotlin.timeTravel)
 }

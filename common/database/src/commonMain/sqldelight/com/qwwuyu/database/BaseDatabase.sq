@@ -1,0 +1,29 @@
+CREATE TABLE IF NOT EXISTS KV (
+    k TEXT NOT NULL,
+    v TEXT NOT NULL
+);
+
+selectAll:
+SELECT *
+FROM KV;
+
+select:
+SELECT *
+FROM KV
+WHERE k = :k;
+
+add:
+INSERT INTO KV (k, v)
+VALUES (:k, :v);
+
+setValue:
+UPDATE KV
+SET v = :v
+WHERE k = :k;
+
+delete:
+DELETE FROM KV
+WHERE k = :k;
+
+clear:
+DELETE FROM KV;
