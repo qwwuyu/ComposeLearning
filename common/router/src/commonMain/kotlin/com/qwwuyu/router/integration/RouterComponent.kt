@@ -1,6 +1,6 @@
 package com.qwwuyu.router.integration
 
-import com.arkivanov.decompose.*
+import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.RouterState
 import com.arkivanov.decompose.router.pop
 import com.arkivanov.decompose.router.push
@@ -18,11 +18,14 @@ import com.qwwuyu.router.MRouter
 import com.qwwuyu.router.MRouter.Child
 import com.qwwuyu.tkv.MKV
 import com.qwwuyu.tkv.integration.KVComponent
+import com.qwwuyu.widget.MWidget
+import com.qwwuyu.widget.integration.WidgetComponent
 
 class RouterComponent internal constructor(
     componentContext: ComponentContext,
     private val home: (ComponentContext, Consumer<MHome.Output>) -> MHome,
-    private val kv: (ComponentContext, Consumer<MKV.Output>) -> MKV
+    private val widget: (ComponentContext, type: String, Consumer<MWidget.Output>) -> MWidget,
+    private val kv: (ComponentContext, Consumer<MKV.Output>) -> MKV,
 ) : MRouter, ComponentContext by componentContext {
 
     constructor(
@@ -36,6 +39,14 @@ class RouterComponent internal constructor(
                 componentContext = childContext,
                 storeFactory = storeFactory,
                 database = database,
+                output = output
+            )
+        },
+        widget = { childContext, type, output ->
+            WidgetComponent(
+                componentContext = childContext,
+                storeFactory = storeFactory,
+                type = type,
                 output = output
             )
         },
@@ -61,11 +72,14 @@ class RouterComponent internal constructor(
         when (configuration) {
             is Configuration.HOME -> Child.Home(home(componentContext, Consumer(::onMHomeOutput)))
             is Configuration.KV -> Child.KV(kv(componentContext, Consumer(::onMKVOutput)))
+            is Configuration.WIDGET -> Child.Widget(
+                widget(componentContext, configuration.type, Consumer(::onWidgetOutput))
+            )
         }
 
     private fun onMHomeOutput(output: MHome.Output): Unit =
         when (output) {
-            is MHome.Output.Selected -> router.push(Configuration.KV)
+            is MHome.Output.Widget -> router.push(Configuration.WIDGET(""))
         }
 
     private fun onMKVOutput(output: MKV.Output): Unit =
@@ -74,11 +88,21 @@ class RouterComponent internal constructor(
             is MKV.Output.Selected -> router.pop()
         }
 
+    private fun onWidgetOutput(output: MWidget.Output): Unit =
+        when (output) {
+            is MWidget.Output.Finished -> router.pop()
+            is MWidget.Output.TKV -> router.push(Configuration.KV)
+            is MWidget.Output.Selected -> router.push(Configuration.WIDGET(output.type))
+        }
+
     private sealed class Configuration : Parcelable {
         @Parcelize
         object HOME : Configuration()
 
         @Parcelize
         object KV : Configuration()
+
+        @Parcelize
+        data class WIDGET(val type: String) : Configuration()
     }
 }

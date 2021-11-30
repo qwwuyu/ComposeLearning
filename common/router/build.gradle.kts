@@ -12,6 +12,7 @@ kotlin {
             dependencies {
                 api(project(":common:database"))
                 api(project(":common:home"))
+                api(project(":common:widget"))
                 api(project(":common:tkv"))
                 api(Deps.ArkIvanov.Decompose.decompose)
                 api(Deps.ArkIvanov.MVIKotlin.mvikotlin)

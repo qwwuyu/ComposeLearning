@@ -15,8 +15,8 @@ import com.badoo.reaktive.coroutinesinterop.asScheduler
 import com.badoo.reaktive.scheduler.overrideSchedulers
 import com.qwwuyu.database.DefaultBaseDatabase
 import com.qwwuyu.router.integration.RouterComponent
-import com.qwwuyu.server.compose.module.RouterContent
-import com.qwwuyu.server.compose.theme.AppTheme
+import com.qwwuyu.compose.module.RouterContent
+import com.qwwuyu.compose.theme.AppTheme
 import kotlinx.coroutines.Dispatchers
 
 fun main() {

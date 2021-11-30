@@ -1,4 +1,4 @@
-package com.qwwuyu.home.integration
+package com.qwwuyu.widget.integration
 
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.value.Value
@@ -8,29 +8,36 @@ import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.badoo.reaktive.base.Consumer
 import com.badoo.reaktive.base.invoke
 import com.qwwuyu.base.utils.asValue
-import com.qwwuyu.database.IBaseDatabase
-import com.qwwuyu.home.MHome
-import com.qwwuyu.home.MHome.Model
-import com.qwwuyu.home.MHome.Output
-import com.qwwuyu.home.store.HomeStoreProvider
+import com.qwwuyu.widget.MWidget
+import com.qwwuyu.widget.MWidget.Model
+import com.qwwuyu.widget.MWidget.Output
+import com.qwwuyu.widget.store.WidgetStoreProvider
 
-class HomeComponent(
+class WidgetComponent(
     componentContext: ComponentContext,
     storeFactory: StoreFactory,
-    database: IBaseDatabase,
+    type: String,
     private val output: Consumer<Output>
-) : MHome, ComponentContext by componentContext {
+) : MWidget, ComponentContext by componentContext {
 
     private val store = instanceKeeper.getStore {
-        HomeStoreProvider(
+        WidgetStoreProvider(
             storeFactory = storeFactory,
-            database = HomeStoreDatabase(database = database)
+            type = type
         ).provide()
     }
 
     override val models: Value<Model> = store.asValue().map(stateToModel)
 
-    override fun onWidget() {
-        output(Output.Widget)
+    override fun finish() {
+        output(Output.Finished)
+    }
+
+    override fun onItemClicked(type: String) {
+        output(Output.Selected(type = type))
+    }
+
+    override fun onTKV() {
+        output(Output.TKV)
     }
 }

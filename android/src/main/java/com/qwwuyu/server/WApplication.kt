@@ -2,7 +2,7 @@ package com.qwwuyu.server
 
 import android.util.Log
 import com.qwwuyu.base.LibApplication
-import com.qwwuyu.server.compose.utils.WLog
+import com.qwwuyu.compose.utils.WLog
 
 class WApplication : LibApplication() {
     override fun onCreate() {

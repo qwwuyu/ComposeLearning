@@ -3,6 +3,7 @@ include(
     ":common:database",
     ":common:router",
     ":common:home",
+    ":common:widget",
     ":common:tkv",
     ":common:main",
     ":android",
