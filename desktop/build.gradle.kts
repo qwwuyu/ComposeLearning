@@ -40,8 +40,8 @@ compose.desktop {
             packageName = "qwwuyu"
             packageVersion = "1.0.0"
             vendor = "qwwuyu"
-            description = "description"
-            copyright = "copyright"
+            description = "qwwuyu compose"
+            copyright = "qwwuyu copyright"
 
             windows {
 //                menu = true

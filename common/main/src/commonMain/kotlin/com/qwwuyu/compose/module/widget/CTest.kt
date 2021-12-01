@@ -17,6 +17,6 @@ class CTest {
 @Composable
 fun CTestMain() {
     Column(Modifier.fillMaxSize()) {
-
+        throw RuntimeException("123")
     }
 }
