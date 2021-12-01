@@ -30,7 +30,7 @@ class HomeComponent(
 
     override val models: Value<Model> = store.asValue().map(stateToModel)
 
-    override fun onWidget() {
-        output(Output.Widget)
+    override fun onWidget(type: String) {
+        output(Output.Widget(type))
     }
 }

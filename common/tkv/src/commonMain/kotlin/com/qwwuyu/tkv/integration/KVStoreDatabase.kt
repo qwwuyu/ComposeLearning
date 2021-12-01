@@ -18,6 +18,6 @@ internal class KVStoreDatabase(
     override fun delete(key: String): Completable =
         database.delete(k = key)
 
-    override fun add(key: String, value: String): Completable =
+    override fun setValue(key: String, value: String): Completable =
         database.setValue(k = key, v = value)
 }

@@ -27,7 +27,7 @@ fun WidgetContent(component: MWidget) {
 
         Box(Modifier.weight(1F)) {
             when (model.type) {
-                "CWindows" -> CWindows.main()
+                "CSystem" -> CWindows.main()
                 "CText" -> CText.main()
                 "CEdit" -> CEdit.main()
                 "CButton" -> CButton.main()
@@ -50,8 +50,9 @@ fun WidgetContent(component: MWidget) {
 @Composable
 fun TestScreenCompose(onItemClicked: (type: String) -> Unit, onTKV: () -> Unit) {
     Column(Modifier.verticalScroll(rememberScrollState())) {
+        TestTextCompose("router,database,key-value") { onTKV() }
         for (text in arrayOf(
-            "CWindows",
+            "CSystem",
             "CText",
             "CEdit",
             "CButton",
@@ -68,7 +69,6 @@ fun TestScreenCompose(onItemClicked: (type: String) -> Unit, onTKV: () -> Unit) 
         )) {
             TestTextCompose(text, onItemClicked)
         }
-        TestTextCompose("router,database,key-value") { onTKV() }
     }
 }
 

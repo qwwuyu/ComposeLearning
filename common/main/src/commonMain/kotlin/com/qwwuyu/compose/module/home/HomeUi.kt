@@ -20,7 +20,7 @@ fun HomeContent(component: MHome) {
         TopAppBar(title = { Text(text = "Home") })
 
         Button(onClick = {
-            component.onWidget()
-        }, modifier = Modifier.padding(8.dp)) { Text(text = "Widget") }
+            component.onWidget("Widget\\Util")
+        }, modifier = Modifier.padding(8.dp)) { Text(text = "Widget\\Util") }
     }
 }

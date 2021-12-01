@@ -36,15 +36,31 @@ class KVComponent(
         output(Output.Finished)
     }
 
-    override fun onItemClicked(item: KVItem) {
-        output(Output.Selected(item = item))
-    }
-
-    override fun onAddItemClicked(key: String, value: String) {
-        store.accept(Intent.AddItem(key = key, value = value))
-    }
-
     override fun onItemDeleteClicked(key: String) {
         store.accept(Intent.DeleteItem(key = key))
+    }
+
+    override fun onAddClicked() {
+        store.accept(Intent.AddClick)
+    }
+
+    override fun onItemClicked(item: KVItem) {
+        store.accept(Intent.ItemClicked(item))
+    }
+
+    override fun onConfirm() {
+        store.accept(Intent.Confirm)
+    }
+
+    override fun onClose() {
+        store.accept(Intent.Close)
+    }
+
+    override fun onKeyTextChanged(text: String) {
+        store.accept(Intent.KeyTextChanged(text))
+    }
+
+    override fun onValueTextChanged(text: String) {
+        store.accept(Intent.ValueTextChanged(text))
     }
 }

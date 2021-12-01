@@ -26,12 +26,6 @@ internal class KVStoreProvider(
         reducer = ReducerImpl
     ) {}
 
-    private sealed class Result {
-        data class ItemsLoaded(val items: List<KVItem>) : Result()
-        data class ItemDeleted(val key: String) : Result()
-        data class AddItemEnd(val key: String, val value: String) : Result()
-    }
-
     private inner class ExecutorImpl : ReaktiveExecutor<Intent, Unit, State, Result, Nothing>() {
         override fun executeAction(action: Unit, getState: () -> State) {
             database
@@ -44,7 +38,12 @@ internal class KVStoreProvider(
         override fun executeIntent(intent: Intent, getState: () -> State): Unit =
             when (intent) {
                 is Intent.DeleteItem -> deleteItem(key = intent.key)
-                is Intent.AddItem -> addItem(intent.key, intent.value)
+                is Intent.AddClick -> dispatch(Result.AddClick)
+                is Intent.ItemClicked -> dispatch(Result.ItemClicked(intent.item))
+                is Intent.Confirm -> confirm(getState())
+                is Intent.Close -> dispatch(Result.Close)
+                is Intent.KeyTextChanged -> dispatch(Result.KeyTextChanged(intent.text))
+                is Intent.ValueTextChanged -> dispatch(Result.ValueTextChanged(intent.text))
             }
 
         private fun deleteItem(key: String) {
@@ -52,10 +51,26 @@ internal class KVStoreProvider(
             database.delete(key = key).subscribeScoped()
         }
 
-        private fun addItem(key: String, value: String) {
-            dispatch(Result.AddItemEnd(key, value))
-            database.add(key, value).subscribeScoped()
+        private fun confirm(state: State) {
+            if (state.addItem.show) {
+                dispatch(Result.Confirm)
+                database.setValue(state.addItem.key, state.addItem.value).subscribeScoped()
+            } else if (state.editItem.show) {
+                dispatch(Result.Confirm)
+                database.setValue(state.editItem.key, state.editItem.value).subscribeScoped()
+            }
         }
+    }
+
+    private sealed class Result {
+        data class ItemsLoaded(val items: List<KVItem>) : Result()
+        data class ItemDeleted(val key: String) : Result()
+        object AddClick : Result()
+        data class ItemClicked(val item: KVItem) : Result()
+        data class KeyTextChanged(val text: String) : Result()
+        data class ValueTextChanged(val text: String) : Result()
+        object Confirm : Result()
+        object Close : Result()
     }
 
     private object ReducerImpl : Reducer<State, Result> {
@@ -63,7 +78,35 @@ internal class KVStoreProvider(
             when (result) {
                 is Result.ItemsLoaded -> copy(items = result.items)
                 is Result.ItemDeleted -> copy(items = items.filterNot { it.key == result.key })
-                is Result.AddItemEnd -> copy()
+                is Result.AddClick -> {
+                    if (!editItem.show) copy(addItem = addItem.copy(show = true))
+                    else copy()
+                }
+                is Result.ItemClicked -> {
+                    if (!addItem.show)
+                        copy(editItem = editItem.copy(show = true, key = result.item.key, value = result.item.value))
+                    else copy()
+                }
+                is Result.KeyTextChanged -> {
+                    if (addItem.show) copy(addItem = addItem.copy(key = result.text))
+                    else if (editItem.show) copy(editItem = editItem.copy(key = result.text))
+                    else copy()
+                }
+                is Result.ValueTextChanged -> {
+                    if (addItem.show) copy(addItem = addItem.copy(value = result.text))
+                    else if (editItem.show) copy(editItem = editItem.copy(value = result.text))
+                    else copy()
+                }
+                is Result.Confirm -> {
+                    if (addItem.show) copy(addItem = addItem.copy(show = false, key = "", value = ""))
+                    else if (editItem.show) copy(editItem = editItem.copy(show = false, key = "", value = ""))
+                    else copy()
+                }
+                is Result.Close -> {
+                    if (addItem.show) copy(addItem = addItem.copy(show = false))
+                    else if (editItem.show) copy(editItem = editItem.copy(show = false))
+                    else copy()
+                }
             }
     }
 
@@ -72,6 +115,6 @@ internal class KVStoreProvider(
 
         fun delete(key: String): Completable
 
-        fun add(key: String, value: String): Completable
+        fun setValue(key: String, value: String): Completable
     }
 }

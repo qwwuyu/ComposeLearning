@@ -79,13 +79,12 @@ class RouterComponent internal constructor(
 
     private fun onMHomeOutput(output: MHome.Output): Unit =
         when (output) {
-            is MHome.Output.Widget -> router.push(Configuration.WIDGET(""))
+            is MHome.Output.Widget -> router.push(Configuration.WIDGET(output.type))
         }
 
     private fun onMKVOutput(output: MKV.Output): Unit =
         when (output) {
             is MKV.Output.Finished -> router.pop()
-            is MKV.Output.Selected -> router.pop()
         }
 
     private fun onWidgetOutput(output: MWidget.Output): Unit =
