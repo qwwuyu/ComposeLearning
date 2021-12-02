@@ -34,7 +34,7 @@ compose.desktop {
         mainClass = "com.qwwuyu.server.MainKt"
 
         nativeDistributions {
-            modules("java.sql")
+            modules(*jdkModules)
 
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb, TargetFormat.Exe)
             packageName = "qwwuyu"

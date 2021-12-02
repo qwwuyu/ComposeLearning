@@ -23,6 +23,6 @@ fun handleError() {
         if (!errorDir.exists()) errorDir.mkdir()
         val errorFile = File(errorDir, "${date}.log")
         errorFile.printWriter().use { it.print(sw.toString()) }
-        exceptionHandler.uncaughtException(t, RuntimeException("运行出错，请查看错误文件：${errorFile.path}", e))
+        exceptionHandler?.uncaughtException(t, RuntimeException("运行出错，请查看错误文件：${errorFile.path}", e))
     }
 }
