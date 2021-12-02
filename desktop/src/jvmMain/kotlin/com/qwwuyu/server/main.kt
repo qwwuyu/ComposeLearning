@@ -3,17 +3,17 @@ package com.qwwuyu.server
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.text.selection.DisableSelection
 import androidx.compose.material.Surface
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.window.*
+import androidx.compose.ui.window.Window
+import androidx.compose.ui.window.rememberWindowState
 import com.arkivanov.decompose.DefaultComponentContext
 import com.arkivanov.decompose.extensions.compose.jetbrains.lifecycle.LifecycleController
 import com.arkivanov.essenty.lifecycle.LifecycleRegistry
 import com.arkivanov.mvikotlin.main.store.DefaultStoreFactory
 import com.badoo.reaktive.coroutinesinterop.asScheduler
 import com.badoo.reaktive.scheduler.overrideSchedulers
-import com.qwwuyu.base.handleError
+import com.qwwuyu.base.handleErrorApplication
 import com.qwwuyu.compose.module.RouterContent
 import com.qwwuyu.compose.theme.AppTheme
 import com.qwwuyu.database.DefaultBaseDatabase
@@ -22,17 +22,15 @@ import kotlinx.coroutines.Dispatchers
 import kotlin.system.exitProcess
 
 fun main() {
-    handleError()
+    handleErrorApplication {
+        overrideSchedulers(main = Dispatchers.Main::asScheduler)
+        val lifecycle = LifecycleRegistry()
+        val rc = RouterComponent(
+            componentContext = DefaultComponentContext(lifecycle = lifecycle),
+            storeFactory = DefaultStoreFactory(),
+            database = DefaultBaseDatabase()
+        )
 
-    overrideSchedulers(main = Dispatchers.Main::asScheduler)
-    val lifecycle = LifecycleRegistry()
-    val rc = RouterComponent(
-        componentContext = DefaultComponentContext(lifecycle = lifecycle),
-        storeFactory = DefaultStoreFactory(),
-        database = DefaultBaseDatabase()
-    )
-
-    application {
         val windowState = rememberWindowState()
         LifecycleController(lifecycle, windowState)
 
@@ -54,14 +52,4 @@ fun main() {
             }
         }
     }
-}
-
-
-@Composable
-private fun ApplicationScope.ApplicationTray(state: TrayState) {
-    Tray(
-        icon = painterResource("drawable-nodpi/icon.png"),
-        state = state,
-        tooltip = "hint qwwuyu",
-        menu = { })
 }

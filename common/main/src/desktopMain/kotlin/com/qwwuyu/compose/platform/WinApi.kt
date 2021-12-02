@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.RenderVectorGroup
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.*
 import com.qwwuyu.compose.module.widget.SelectTab
@@ -35,7 +36,7 @@ actual fun WinApi() {
         val text = SelectTab(
             listOf(
                 "Window", "Window2", "file", "splitPane",
-                "desktop open", "desktop browse", "DropdownMenu", "CDialog"
+                "desktop open", "desktop browse", "DropdownMenu", "CDialog",
             )
         )
         Box(Modifier.weight(1f)) {
@@ -287,4 +288,14 @@ fun CDialog() {
             }
         }
     }
+}
+
+/* ========================  ======================== */
+@Composable
+private fun ApplicationScope.ApplicationTray(state: TrayState) {
+    Tray(
+        icon = painterResource("drawable-nodpi/icon.png"),
+        state = state,
+        tooltip = "hint qwwuyu",
+        menu = { })
 }

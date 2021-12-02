@@ -6,6 +6,10 @@ import java.io.StringWriter
 import java.text.SimpleDateFormat
 import java.util.*
 
+actual fun dataDir(): String {
+    return LibApplication.context.filesDir.absolutePath
+}
+
 actual fun cacheDir(): String {
     return LibApplication.context.cacheDir.absolutePath
 }
@@ -17,7 +21,7 @@ fun handleError() {
         val date = format.format(System.currentTimeMillis())
         val sw = StringWriter()
         e.printStackTrace(PrintWriter(sw))
-        val errorDir = File(cacheDir(), "error")
+        val errorDir = File(dataDir(), "error")
         if (!errorDir.exists()) errorDir.mkdir()
         val errorFile = File(errorDir, "${date}.log")
         errorFile.printWriter().use { it.print(sw.toString()) }

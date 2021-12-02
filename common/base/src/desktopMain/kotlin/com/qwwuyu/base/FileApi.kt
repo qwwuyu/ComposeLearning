@@ -1,28 +1,39 @@
 package com.qwwuyu.base
 
+import com.qwwuyu.base.ext.letIf
 import java.io.File
-import java.io.PrintWriter
-import java.io.StringWriter
-import java.text.SimpleDateFormat
-import java.util.*
 
-actual fun cacheDir(): String {
-    val resourcesDir = File(System.getProperty("user.dir"), "cache")
-    if (!resourcesDir.exists()) resourcesDir.mkdir()
-    return resourcesDir.absolutePath
+const val PROJECT_NAME = "com.qwwuyu.compose"
+private var dataDir: File? = null
+
+actual fun dataDir(): String {
+    dataDir?.letIf({ it.exists() }) { return it.absolutePath }
+    synchronized(PROJECT_NAME) {
+        var dir = File(System.getProperty("user.home"), PROJECT_NAME)
+        if (dir.isDirectory) {
+            dataDir = dir
+            return@synchronized
+        }
+        dir = File(System.getProperty("user.dir"), PROJECT_NAME)
+        if (dir.isDirectory || dir.mkdirs()) {
+            dataDir = dir
+            return@synchronized
+        }
+        dir = File(System.getProperty("user.home"), PROJECT_NAME)
+        if (dir.isDirectory || dir.mkdirs()) {
+            dataDir = dir
+            return@synchronized
+        }
+        dir = File(System.getProperty("java.io.tmpdir"), PROJECT_NAME)
+        if (dir.isDirectory || dir.mkdirs()) {
+            dataDir = dir
+        }
+    }
+    return dataDir!!.absolutePath
 }
 
-fun handleError() {
-    val exceptionHandler = Thread.getDefaultUncaughtExceptionHandler()
-    Thread.setDefaultUncaughtExceptionHandler { t, e ->
-        val format = SimpleDateFormat("yyyy_MM_dd HH_mm_ss", Locale.getDefault())
-        val date = format.format(System.currentTimeMillis())
-        val sw = StringWriter()
-        e.printStackTrace(PrintWriter(sw))
-        val errorDir = File(cacheDir(), "error")
-        if (!errorDir.exists()) errorDir.mkdir()
-        val errorFile = File(errorDir, "${date}.log")
-        errorFile.printWriter().use { it.print(sw.toString()) }
-        exceptionHandler?.uncaughtException(t, RuntimeException("运行出错，请查看错误文件：${errorFile.path}", e))
-    }
+actual fun cacheDir(): String {
+    val resourcesDir = File(System.getProperty("java.io.tmpdir"), PROJECT_NAME)
+    if (resourcesDir.isDirectory || resourcesDir.mkdirs()) return resourcesDir.absolutePath
+    return dataDir()
 }
