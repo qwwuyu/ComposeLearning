@@ -11,9 +11,9 @@ kotlin {
         named("commonMain") {
             dependencies {
                 api(project(":common:database"))
-                api(project(":common:home"))
-                api(project(":common:widget"))
-                api(project(":common:tkv"))
+                api(project(":common:fun:home"))
+                api(project(":common:fun:widget"))
+                api(project(":common:fun:tkv"))
                 api(Deps.ArkIvanov.Decompose.decompose)
                 api(Deps.ArkIvanov.MVIKotlin.mvikotlin)
                 api(Deps.ArkIvanov.MVIKotlin.extensionsReaktive)

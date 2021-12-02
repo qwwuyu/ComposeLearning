@@ -10,7 +10,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.window.Dialog
 import com.qwwuyu.compose.module.widget.SelectTab
-import com.qwwuyu.compose.utils.WLog
+import com.qwwuyu.base.utils.WLog
 
 @Composable
 actual fun WinApi() {

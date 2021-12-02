@@ -5,12 +5,25 @@ plugins {
 
 kotlin {
     sourceSets {
-        named("commonMain") {
+        commonMain {
             dependencies {
-                api(project(":common:base"))
+                api(project(":tool:libc"))
+                api(project(":common:comm"))
                 api(project(":common:database"))
                 api(project(":common:router"))
                 implementation(Deps.ArkIvanov.Decompose.extensionsCompose)
+            }
+        }
+
+        androidMain {
+            dependencies {
+                api(project(":common:network"))
+            }
+        }
+
+        desktopMain {
+            dependencies {
+                api(project(":common:network"))
             }
         }
     }

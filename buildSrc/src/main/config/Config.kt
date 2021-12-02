@@ -27,7 +27,7 @@ object Apps {
     const val version = "${major}.${minor}.${revision}"
     const val code = major * 10000 + minor * 100 + revision
 
-    const val group = "com.qwwuyu.server"
+    const val group = "com.qwwuyu.compose"
     const val applicationId = group
     const val compileSdkVersion = 31
     const val minSdkVersion = 23
@@ -77,6 +77,21 @@ object Deps {
 
         object Activity {
             const val activityCompose = "androidx.activity:activity-compose:${Versions.activityCompose}"
+        }
+    }
+
+    object Network {
+        const val gson = "com.google.code.gson:gson:2.8.6"
+
+        object OkHttp {
+            const val core = "com.squareup.okhttp3:okhttp:${Versions.okhttp3}"
+            const val urlconnection = "com.squareup.okhttp3:okhttp-urlconnection:${Versions.okhttp3}"
+            const val logging = "com.squareup.okhttp3:logging-interceptor:${Versions.okhttp3}"
+        }
+
+        object Retrofit {
+            const val core = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
+            const val converterGson = "com.squareup.retrofit2:converter-gson:${Versions.retrofit}"
         }
     }
 

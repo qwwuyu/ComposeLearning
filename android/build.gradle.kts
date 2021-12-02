@@ -64,7 +64,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":common:base"))
+    implementation(project(":tool:libc"))
     implementation(project(":common:main"))
     implementation(Deps.AndroidX.Activity.activityCompose)
 

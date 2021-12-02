@@ -14,14 +14,14 @@ kotlin {
     sourceSets {
         commonMain {
             dependencies {
-                api(project(":common:base"))
+                api(project(":tool:libc"))
                 api(Deps.Badoo.Reaktive.reaktive)
             }
         }
 
         androidMain {
             dependencies {
-                api(project(":common:base"))
+                api(project(":tool:libc"))
                 api(Deps.Squareup.SQLDelight.androidDriver)
                 api(Deps.Squareup.SQLDelight.sqliteDriver)
             }
@@ -29,7 +29,7 @@ kotlin {
 
         desktopMain {
             dependencies {
-                api(project(":common:base"))
+                api(project(":tool:libc"))
                 api(Deps.Squareup.SQLDelight.sqliteDriver)
             }
         }

@@ -15,7 +15,7 @@ kotlin {
         named("jvmMain") {
             dependencies {
                 implementation(compose.desktop.currentOs)
-                implementation(project(":common:base"))
+                implementation(project(":tool:libc"))
                 implementation(project(":common:main"))
 
                 implementation(Deps.ArkIvanov.Decompose.decompose)
@@ -31,7 +31,7 @@ kotlin {
 
 compose.desktop {
     application {
-        mainClass = "com.qwwuyu.server.MainKt"
+        mainClass = "com.qwwuyu.compose.MainKt"
 
         nativeDistributions {
             modules(*jdkModules)

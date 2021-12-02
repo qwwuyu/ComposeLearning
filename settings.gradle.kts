@@ -1,11 +1,17 @@
 include(
-    ":common:base",
+    ":tool:libc",
+    ":tool:libk",
+
+    ":common:comm",
+    ":common:network",
     ":common:database",
+
+    ":common:fun:home",
+    ":common:fun:widget",
+    ":common:fun:tkv",
     ":common:router",
-    ":common:home",
-    ":common:widget",
-    ":common:tkv",
+
     ":common:main",
     ":android",
-    ":desktop"
+    ":desktop",
 )
