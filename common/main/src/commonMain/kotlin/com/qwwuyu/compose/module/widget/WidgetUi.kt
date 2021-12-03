@@ -10,6 +10,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.arkivanov.decompose.extensions.compose.jetbrains.subscribeAsState
+import com.qwwuyu.base.utils.WLog
 import com.qwwuyu.widget.MWidget
 
 @Composable
@@ -75,6 +76,7 @@ fun TestScreenCompose(onItemClicked: (type: String) -> Unit, onTKV: () -> Unit) 
 @Composable
 fun TestTextCompose(title: String, onItemClicked: (type: String) -> Unit) {
     Box(modifier = Modifier.fillMaxWidth().height(48.dp).clickable {
+        WLog.i("TestTextCompose=${title}")
         onItemClicked(title)
     }) {
         Text(text = title, modifier = Modifier.align(Alignment.CenterStart).padding(16.dp, 0.dp))

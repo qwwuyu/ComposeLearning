@@ -22,11 +22,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlin.system.exitProcess
 
 fun main() {
-    WLog.init(object : WLog.ILog {
-        override fun i(contents: Any?) {
-            println("$contents")
-        }
-    })
+    WLog.Builder().enable().enableLogHead(true).setLogTag("qwwuyu")
     handleErrorApplication {
         overrideSchedulers(main = Dispatchers.Main::asScheduler)
         val lifecycle = LifecycleRegistry()

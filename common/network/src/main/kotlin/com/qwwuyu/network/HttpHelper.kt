@@ -1,7 +1,6 @@
 package com.qwwuyu.network
 
 import com.google.gson.JsonParseException
-import com.qwwuyu.base.utils.WLog
 import com.qwwuyu.network.converter.ConverterFactory
 import com.qwwuyu.network.converter.DataException
 import com.qwwuyu.network.gson.GsonHelper
@@ -32,7 +31,7 @@ object HttpHelper {
             .cookieJar(JavaNetCookieJar(cookieManager))
         //HttpsFactory.safeHttps(builder)
 
-        builder.addInterceptor(HttpLoggingInterceptor { message: String? -> WLog.i(message) }
+        builder.addInterceptor(HttpLoggingInterceptor { message: String? -> }
             .setLevel(HttpLoggingInterceptor.Level.BODY))
 
         val client = builder.build()
@@ -52,16 +51,14 @@ object HttpHelper {
      * 默认的参数,不包括token
      */
     fun createMap(): MutableMap<String, Any> {
-        WLog.i("http request")
         val map: MutableMap<String, Any> = mutableMapOf()
         map["timestamp"] = System.currentTimeMillis()
         return map
     }
 
     fun handleError(e: Throwable, onErr: (code: Int, msg: String?) -> Unit) {
-        WLog.i("http ${e::class.java.name}:" + e.message)
         when (e) {
-            is CancellationException -> WLog.i("http cancel")
+            is CancellationException -> return
             is DataException -> onErr(e.code, e.msg)
             is JsonParseException -> onErr(HttpConfig.HTTP_NO_CODE, "数据解析失败")
             is SocketTimeoutException -> onErr(HttpConfig.HTTP_NO_CODE, "网络连接超时")

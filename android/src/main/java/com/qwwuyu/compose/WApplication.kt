@@ -8,6 +8,6 @@ class WApplication : LibApplication() {
     override fun onCreate() {
         super.onCreate()
         handleError()
-        WLog.init(null)
+        WLog.Builder().enable().enableLogHead(true).setLogTag("qwwuyu")
     }
 }
