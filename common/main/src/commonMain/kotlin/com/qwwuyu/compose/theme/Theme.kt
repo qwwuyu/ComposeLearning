@@ -117,7 +117,8 @@ enum class ColorPallet {
 
 @Composable
 fun AppTheme(content: @Composable () -> Unit) {
-    val appThemeState = remember { mutableStateOf(AppThemeState()) }
+    val systemInDarkTheme = isSystemInDarkTheme()
+    val appThemeState = remember { mutableStateOf(AppThemeState(systemInDarkTheme, BLUE)) }
 
     val colors = when (appThemeState.value.colorPallet) {
         GREEN -> if (appThemeState.value.darkTheme) DarkGreenColorPalette else LightGreenColorPalette
@@ -144,7 +145,7 @@ fun AppTheme(content: @Composable () -> Unit) {
 
 /* ======================== theme change ======================== */
 data class AppThemeState(
-    var darkTheme: Boolean = isSystemInDarkTheme(),
+    var darkTheme: Boolean = false,
     var colorPallet: ColorPallet = BLUE
 )
 
