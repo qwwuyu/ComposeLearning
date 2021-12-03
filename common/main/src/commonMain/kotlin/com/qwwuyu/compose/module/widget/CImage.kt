@@ -1,7 +1,7 @@
 package com.qwwuyu.compose.module.widget
 
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import com.qwwuyu.imageloader.RemoteImage
 
 class CImage {
     companion object {
@@ -14,5 +14,5 @@ class CImage {
 
 @Composable
 fun CImageMain() {
-    Text("CImage")
+    RemoteImage("https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png")
 }

@@ -20,4 +20,3 @@ val orange700 = Color(0xFFba000d)
 
 
 val teal200 = Color(0xff80deea)
-val twitterColor = Color(0xFF1DA1F2)

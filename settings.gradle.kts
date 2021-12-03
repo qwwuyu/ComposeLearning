@@ -1,6 +1,7 @@
 include(
     ":tool:libc",
     ":tool:libk",
+    ":tool:imageloader",
 
     ":common:comm",
     ":common:network",

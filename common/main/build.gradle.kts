@@ -8,6 +8,7 @@ kotlin {
         commonMain {
             dependencies {
                 api(project(":tool:libc"))
+                api(project(":tool:imageloader"))
                 api(project(":common:comm"))
                 api(project(":common:database"))
                 api(project(":common:router"))

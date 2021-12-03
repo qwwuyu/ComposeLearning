@@ -1,7 +1,6 @@
 package com.qwwuyu.compose
 
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.text.selection.DisableSelection
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -49,11 +48,9 @@ fun main() {
             title = "qwwuyu",
             icon = painterResource("drawable-nodpi/icon.png"),
         ) {
-            DisableSelection {
-                AppTheme {
-                    Surface(modifier = Modifier.fillMaxSize()) {
-                        RouterContent(rc)
-                    }
+            AppTheme {
+                Surface(modifier = Modifier.fillMaxSize()) {
+                    RouterContent(rc)
                 }
             }
         }

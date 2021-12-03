@@ -37,10 +37,10 @@ fun WidgetContent(component: MWidget) {
                 "CToggle" -> CToggle.main()
                 "CView" -> CView.main()
                 "CTheme" -> CTheme.main()
-                "CLocal" -> CLocal.main()
                 "CNet" -> CNet.main()
                 "CImage" -> CImage.main()
-                "CTest" -> CTest.main()
+                "CompositionLocalProvider" -> CLocal.main()
+                "CCrash" -> CTest.main()
                 else -> TestScreenCompose(component::onItemClicked, component::onTKV)
             }
         }
@@ -62,10 +62,10 @@ fun TestScreenCompose(onItemClicked: (type: String) -> Unit, onTKV: () -> Unit) 
             "CToggle",
             "CView",
             "CTheme",
-            "CLocal",
             "CNet",
             "CImage",
-            "CTest",
+            "CompositionLocalProvider",
+            "CCrash",
         )) {
             TestTextCompose(text, onItemClicked)
         }

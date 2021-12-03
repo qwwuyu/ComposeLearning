@@ -49,6 +49,7 @@ object Versions {
 
     const val okhttp3 = "3.14.9"
     const val retrofit = "2.9.0"
+    const val coil = "1.4.0"
 }
 
 fun kotlinx(id: String, version: String) = "org.jetbrains.kotlinx:kotlinx-$id:$version"
@@ -94,6 +95,8 @@ object Deps {
             const val converterGson = "com.squareup.retrofit2:converter-gson:${Versions.retrofit}"
         }
     }
+
+    const val coil = "io.coil-kt:coil-compose:${Versions.coil}"
 
     object ArkIvanov {
         object MVIKotlin {
