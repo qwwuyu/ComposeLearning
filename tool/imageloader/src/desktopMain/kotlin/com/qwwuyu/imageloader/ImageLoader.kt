@@ -11,6 +11,7 @@ import javax.imageio.ImageIO
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 
+//TODO 本地文件缓存 大小配置LRUCache
 object ImageLoader {
     private val httpClient = OkHttpClient()
     private val cache: MutableMap<String, ByteArray?> = mutableMapOf()
