@@ -19,8 +19,8 @@ package com.qwwuyu.network.converter
 import com.google.gson.Gson
 import com.google.gson.internal.`$Gson$Types`
 import com.qwwuyu.network.HttpConfig
-import com.qwwuyu.network.gson.GsonHelper
-import com.qwwuyu.network.gson.Ignore
+import com.qwwuyu.base.gson.GsonHelper
+import com.qwwuyu.base.gson.Ignore
 import com.qwwuyu.comm.entity.BaseBean
 import okhttp3.ResponseBody
 import retrofit2.Converter

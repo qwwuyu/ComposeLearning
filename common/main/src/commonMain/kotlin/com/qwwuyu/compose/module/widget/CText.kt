@@ -3,16 +3,21 @@ package com.qwwuyu.compose.module.widget
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme.typography
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.qwwuyu.base.utils.WLog
 
 class CText {
     companion object {
@@ -45,5 +50,30 @@ fun CTextMain() {
             modifier = m, overflow = TextOverflow.Clip, maxLines = 1,
             text = "TextOverflow.Clip: This text is supposed to clip with max 1 line allowed for this",
         )
+
+
+        val annotatedString = buildAnnotatedString {
+            pushStringAnnotation(
+                tag = "URL",
+                annotation = "pushStringAnnotation",
+            )
+            withStyle(
+                style = SpanStyle(fontSize = 20.sp)
+            ) {
+                append("buildAnnotatedString")
+            }
+            withStyle(
+                style = SpanStyle(fontWeight = FontWeight.Bold)
+            ) {
+                append("withStyle")
+            }
+            pop()
+        }
+        ClickableText(annotatedString) { offset ->
+            annotatedString.getStringAnnotations(tag = "URL", start = offset, end = offset).firstOrNull()
+                ?.let { annotation ->
+                    WLog.i("click=${annotation}")
+                }
+        }
     }
 }

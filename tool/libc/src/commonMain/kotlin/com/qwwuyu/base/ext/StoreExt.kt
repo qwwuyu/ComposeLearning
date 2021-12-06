@@ -1,4 +1,4 @@
-package com.qwwuyu.base.utils
+package com.qwwuyu.base.ext
 
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.decompose.value.ValueObserver

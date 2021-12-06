@@ -1,4 +1,4 @@
-package com.qwwuyu.base.utils
+package com.qwwuyu.base.ext
 
 import com.arkivanov.essenty.instancekeeper.InstanceKeeper
 import com.arkivanov.essenty.instancekeeper.getOrCreate

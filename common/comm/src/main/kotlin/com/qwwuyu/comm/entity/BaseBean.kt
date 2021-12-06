@@ -1,14 +1,3 @@
 package com.qwwuyu.comm.entity
 
-import kotlin.jvm.JvmField
-
-class BaseBean<T> {
-    @JvmField
-    var state = 0
-
-    @JvmField
-    var info: String? = null
-
-    @JvmField
-    var data: T? = null
-}
+data class BaseBean<T>(var state: Int = 0, var info: String? = null, var data: T? = null)

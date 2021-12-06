@@ -1,4 +1,4 @@
-package com.qwwuyu.network.gson
+package com.qwwuyu.base.gson
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder

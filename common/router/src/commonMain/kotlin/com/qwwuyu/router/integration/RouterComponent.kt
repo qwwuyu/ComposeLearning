@@ -10,7 +10,7 @@ import com.arkivanov.essenty.parcelable.Parcelable
 import com.arkivanov.essenty.parcelable.Parcelize
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.badoo.reaktive.base.Consumer
-import com.qwwuyu.base.utils.Consumer
+import com.qwwuyu.base.ext.Consumer
 import com.qwwuyu.database.IBaseDatabase
 import com.qwwuyu.home.MHome
 import com.qwwuyu.home.integration.HomeComponent

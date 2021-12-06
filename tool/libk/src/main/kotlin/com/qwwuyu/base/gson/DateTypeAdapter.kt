@@ -1,4 +1,4 @@
-package com.qwwuyu.network.gson
+package com.qwwuyu.base.gson
 
 import com.google.gson.TypeAdapter
 import com.google.gson.internal.bind.util.ISO8601Utils

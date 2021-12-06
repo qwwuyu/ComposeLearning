@@ -1,4 +1,4 @@
-package com.qwwuyu.base.utils
+package com.qwwuyu.base.ext
 
 import com.badoo.reaktive.base.Consumer
 

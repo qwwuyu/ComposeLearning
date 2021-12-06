@@ -2,9 +2,9 @@ package com.qwwuyu.compose.module.widget
 
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
+import com.qwwuyu.base.utils.GsonUtil
 import com.qwwuyu.base.utils.WLog
 import com.qwwuyu.compose.platform.httpApi
-import com.qwwuyu.compose.platform.toJson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -25,7 +25,7 @@ fun CNetMain() {
         val job = GlobalScope.launch(Dispatchers.Default) {
             msg = try {
                 val get = httpApi.get()
-                toJson(get)
+                GsonUtil.toJson(get)
             } catch (e: Exception) {
                 e.message ?: ""
             }

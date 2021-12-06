@@ -7,8 +7,7 @@ kotlin {
         dependencies {
             compileOnly(project(":tool:libk"))
             compileOnly("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
-            implementation(project(":common:comm"))
-            api(Deps.Network.gson)
+            compileOnly(project(":common:comm"))
             api(Deps.Network.OkHttp.core)
             api(Deps.Network.OkHttp.urlconnection)
             api(Deps.Network.OkHttp.logging)

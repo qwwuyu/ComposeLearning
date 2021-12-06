@@ -7,7 +7,7 @@ import com.arkivanov.mvikotlin.core.instancekeeper.getStore
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.badoo.reaktive.base.Consumer
 import com.badoo.reaktive.base.invoke
-import com.qwwuyu.base.utils.asValue
+import com.qwwuyu.base.ext.asValue
 import com.qwwuyu.widget.MWidget
 import com.qwwuyu.widget.MWidget.Model
 import com.qwwuyu.widget.MWidget.Output

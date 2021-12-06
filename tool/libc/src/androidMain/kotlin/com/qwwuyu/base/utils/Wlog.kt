@@ -118,7 +118,7 @@ actual object WLog {
 
     actual fun logError(e: Throwable?) {
         if (LOG && logFilter < E && e != null) {
-            log(E, logHead, null, 3, getStackTraceString(e))
+            log(E, logHead, null, 3, e.stackTraceToString())
             e.printStackTrace()
         }
     }
@@ -314,13 +314,6 @@ actual object WLog {
             sb.append(LEFT_BORDER).append(line).append(LINE_SEP)
         }
         return sb.toString()
-    }
-
-    private fun getStackTraceString(tr: Throwable): String {
-        val sw = StringWriter()
-        val pw = PrintWriter(sw)
-        tr.printStackTrace(pw)
-        return sw.toString()
     }
 
     @IntDef(V, D, I, W, E, A)

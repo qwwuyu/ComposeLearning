@@ -2,7 +2,7 @@ package com.qwwuyu.compose.platform
 
 import com.qwwuyu.comm.entity.AccountBean
 import com.qwwuyu.network.HttpHelper
-import com.qwwuyu.network.gson.GsonHelper
+import com.qwwuyu.base.gson.GsonHelper
 import retrofit2.http.GET
 
 @JvmSuppressWildcards
@@ -15,7 +15,3 @@ actual interface HttpApi {
 }
 
 actual val httpApi = HttpHelper.create(HttpApi::class.java)
-
-actual fun toJson(any: Any): String {
-    return GsonHelper.toJson(any)
-}

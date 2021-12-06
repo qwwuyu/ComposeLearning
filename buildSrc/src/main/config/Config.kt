@@ -36,7 +36,7 @@ object Apps {
 
 object Versions {
     const val kotlin = "1.5.31"
-    const val compose = "1.0.0-beta5"
+    const val compose = "1.0.0"
     const val androidTools = "4.2.0"
 
     const val appcompat = "1.3.1"

@@ -9,5 +9,3 @@ expect interface HttpApi {
 }
 
 expect val httpApi: HttpApi
-
-expect fun toJson(any: Any): String

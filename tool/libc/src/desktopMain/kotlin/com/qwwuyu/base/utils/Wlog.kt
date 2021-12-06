@@ -1,7 +1,6 @@
 package com.qwwuyu.base.utils
 
 import java.io.*
-import java.net.UnknownHostException
 import java.text.Format
 import java.text.SimpleDateFormat
 import java.util.*
@@ -112,7 +111,7 @@ actual object WLog {
 
     actual fun logError(e: Throwable?) {
         if (LOG && logFilter < E && e != null) {
-            log(E, logHead, null, 3, getStackTraceString(e))
+            log(E, logHead, null, 3, e.stackTraceToString())
             e.printStackTrace()
         }
     }
@@ -298,22 +297,6 @@ actual object WLog {
             sb.append(LEFT_BORDER).append(line).append(LINE_SEP)
         }
         return sb.toString()
-    }
-
-    private fun getStackTraceString(tr: Throwable?): String {
-        if (tr == null) return ""
-
-        var t: Throwable? = tr
-        while (t != null) {
-            if (t is UnknownHostException) return ""
-            t = t.cause
-        }
-
-        val sw = StringWriter()
-        val pw = PrintWriter(sw)
-        tr.printStackTrace(pw)
-        pw.flush()
-        return sw.toString()
     }
 
     private annotation class TYPE

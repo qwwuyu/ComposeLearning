@@ -10,12 +10,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
-import androidx.compose.ui.window.DialogState
 import androidx.compose.ui.window.WindowPosition
+import androidx.compose.ui.window.rememberDialogState
 
 @Composable
 actual fun BaseDialog(onDismiss: () -> Unit, content: @Composable () -> Unit) {
-    val dialogState = DialogState(position = WindowPosition(Alignment.Center), size = DpSize(360.dp, 480.dp))
+    val dialogState = rememberDialogState(position = WindowPosition(Alignment.Center), size = DpSize(360.dp, 480.dp))
     Dialog(
         onCloseRequest = onDismiss,
 //            undecorated = true,

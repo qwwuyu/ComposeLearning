@@ -1,4 +1,4 @@
-package com.qwwuyu.network.gson
+package com.qwwuyu.base.gson
 
 class Ignore {
     companion object {

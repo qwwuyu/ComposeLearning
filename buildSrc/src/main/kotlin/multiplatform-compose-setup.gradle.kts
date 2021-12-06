@@ -31,6 +31,7 @@ kotlin {
             dependencies {
                 api(compose.desktop.common)
                 api(compose.desktop.currentOs)
+                @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
                 api(compose.desktop.components.splitPane)
             }
         }

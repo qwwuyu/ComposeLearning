@@ -3,7 +3,7 @@ package com.qwwuyu.network
 import com.google.gson.JsonParseException
 import com.qwwuyu.network.converter.ConverterFactory
 import com.qwwuyu.network.converter.DataException
-import com.qwwuyu.network.gson.GsonHelper
+import com.qwwuyu.base.gson.GsonHelper
 import kotlinx.coroutines.CancellationException
 import okhttp3.JavaNetCookieJar
 import okhttp3.OkHttpClient

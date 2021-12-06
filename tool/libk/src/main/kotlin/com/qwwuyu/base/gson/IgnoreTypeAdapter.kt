@@ -1,9 +1,8 @@
-package com.qwwuyu.network.gson
+package com.qwwuyu.base.gson
 
 import com.google.gson.TypeAdapter
 import com.google.gson.stream.JsonReader
 import com.google.gson.stream.JsonWriter
-import com.qwwuyu.network.gson.Ignore
 import java.io.IOException
 
 internal class IgnoreTypeAdapter : TypeAdapter<Ignore?>() {
