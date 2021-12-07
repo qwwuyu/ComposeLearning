@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest
         xmlns:android="http://schemas.android.com/apk/res/android"
-        package="com.qwwuyu.compose">
+        xmlns:tools="http://schemas.android.com/tools"
+        package="com.qwwuyu.example">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
             android:supportsRtl="true"
+            android:networkSecurityConfig="@xml/network_security_config"
             android:name=".WApplication"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            tools:ignore="UnusedAttribute">
         <activity
                 android:name=".MainActivity"
-                android:launchMode="singleTask"
-                android:screenOrientation="portrait">
+                android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>

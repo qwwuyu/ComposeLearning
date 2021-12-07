@@ -1,4 +1,4 @@
-package com.qwwuyu.compose
+package com.qwwuyu.example
 
 import android.os.Bundle
 import androidx.activity.compose.setContent
@@ -12,6 +12,7 @@ import com.arkivanov.mvikotlin.logging.store.LoggingStoreFactory
 import com.arkivanov.mvikotlin.main.store.DefaultStoreFactory
 import com.arkivanov.mvikotlin.timetravel.store.TimeTravelStoreFactory
 import com.qwwuyu.base.platform.LocalDR
+import com.qwwuyu.compose.R
 import com.qwwuyu.compose.module.RouterContent
 import com.qwwuyu.compose.theme.AppTheme
 import com.qwwuyu.database.DefaultBaseDatabase

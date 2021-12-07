@@ -30,6 +30,7 @@ fun CThemeMain() {
         val localTheme = localTheme()
         ThemeCompose("Dark") { localTheme(true, null) }
         ThemeCompose("Light") { localTheme(false, null) }
+        ThemeCompose("BLUE") { localTheme(null, ColorPallet.BLUE) }
         ThemeCompose("PURPLE") { localTheme(null, ColorPallet.PURPLE) }
         ThemeCompose("GREEN") { localTheme(null, ColorPallet.GREEN) }
         ThemeCompose("ORANGE") { localTheme(null, ColorPallet.ORANGE) }

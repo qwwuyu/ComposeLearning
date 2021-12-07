@@ -29,7 +29,6 @@ android {
         getByName("debug") {
             signingConfig = signingConfigs.getByName("sign")
             versionNameSuffix = ".debug"
-            isZipAlignEnabled = false
             isShrinkResources = false
             isMinifyEnabled = false
             proguardFiles("proguard-rules.pro")
@@ -37,9 +36,8 @@ android {
         }
         getByName("release") {
             signingConfig = signingConfigs.getByName("sign")
-            isZipAlignEnabled = false
-            isShrinkResources = false
-            isMinifyEnabled = false
+            isShrinkResources = true
+            isMinifyEnabled = true
             proguardFiles("proguard-rules.pro")
         }
     }

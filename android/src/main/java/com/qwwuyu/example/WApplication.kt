@@ -1,4 +1,4 @@
-package com.qwwuyu.compose
+package com.qwwuyu.example
 
 import com.qwwuyu.base.LibApplication
 import com.qwwuyu.base.handleError
