@@ -19,8 +19,8 @@
 
 **[引入库](https://github.com/qwwuyu/ComposeLearning/blob/main/buildSrc/src/main/config/Config.kt)**
 
-|description|url|implementation|
-|---|---|---|
+|description|implementation|
+|---|---|
 |kotlin插件|org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.31|
 |Compose插件|org.jetbrains.compose:compose-gradle-plugin:1.0.0|
 |android插件|com.android.tools.build:gradle:4.2.0|
