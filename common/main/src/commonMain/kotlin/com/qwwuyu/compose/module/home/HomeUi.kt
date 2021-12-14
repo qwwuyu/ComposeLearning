@@ -22,5 +22,9 @@ fun HomeContent(component: MHome) {
         Button(onClick = {
             component.onWidget("Widget\\Util")
         }, modifier = Modifier.padding(8.dp)) { Text(text = "Widget\\Util") }
+
+        Button(onClick = {
+            component.onNested()
+        }, modifier = Modifier.padding(8.dp)) { Text(text = "Nested Router") }
     }
 }

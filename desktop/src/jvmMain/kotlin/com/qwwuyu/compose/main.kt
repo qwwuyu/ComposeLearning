@@ -12,6 +12,7 @@ import com.arkivanov.essenty.lifecycle.LifecycleRegistry
 import com.arkivanov.mvikotlin.main.store.DefaultStoreFactory
 import com.badoo.reaktive.coroutinesinterop.asScheduler
 import com.badoo.reaktive.scheduler.overrideSchedulers
+import com.qwwuyu.base.getLocalWindowState
 import com.qwwuyu.base.handleErrorApplication
 import com.qwwuyu.base.utils.WLog
 import com.qwwuyu.compose.module.RouterContent
@@ -32,7 +33,7 @@ fun main() {
             database = DefaultBaseDatabase()
         )
 
-        val windowState = rememberWindowState()
+        val windowState = getLocalWindowState()
         LifecycleController(lifecycle, windowState)
 
         Window(

@@ -7,11 +7,14 @@ interface MHome {
 
     fun onWidget(type: String)
 
+    fun onNested()
+
     data class Model(
         val items: List<HomeItem>
     )
 
     sealed class Output {
         data class Widget(val type: String) : Output()
+        object Nested : Output()
     }
 }

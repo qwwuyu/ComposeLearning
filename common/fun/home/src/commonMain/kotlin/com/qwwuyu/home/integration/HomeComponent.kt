@@ -33,4 +33,8 @@ class HomeComponent(
     override fun onWidget(type: String) {
         output(Output.Widget(type))
     }
+
+    override fun onNested() {
+        output(Output.Nested)
+    }
 }

@@ -14,6 +14,7 @@ kotlin {
                 api(project(":common:fun:home"))
                 api(project(":common:fun:widget"))
                 api(project(":common:fun:tkv"))
+                api(project(":common:fun:nested"))
                 api(Deps.ArkIvanov.Decompose.decompose)
                 api(Deps.ArkIvanov.MVIKotlin.mvikotlin)
                 api(Deps.ArkIvanov.MVIKotlin.extensionsReaktive)

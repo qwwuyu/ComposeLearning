@@ -46,7 +46,7 @@ actual object WLog {
     private var logFilter = V
     private var executor: ExecutorService? = null
     private var dir: String? = null
-    private var head_sep = LINE_SEP
+    private var head_sep = ": "
 
     actual fun v(contents: Any) {
         log4(V, logTag, contents)

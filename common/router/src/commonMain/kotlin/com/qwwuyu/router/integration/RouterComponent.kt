@@ -14,6 +14,8 @@ import com.qwwuyu.base.ext.Consumer
 import com.qwwuyu.database.IBaseDatabase
 import com.qwwuyu.home.MHome
 import com.qwwuyu.home.integration.HomeComponent
+import com.qwwuyu.nested.MNested
+import com.qwwuyu.nested.NestedComponent
 import com.qwwuyu.router.MRouter
 import com.qwwuyu.router.MRouter.Child
 import com.qwwuyu.tkv.MKV
@@ -26,6 +28,7 @@ class RouterComponent internal constructor(
     private val home: (ComponentContext, Consumer<MHome.Output>) -> MHome,
     private val widget: (ComponentContext, type: String, Consumer<MWidget.Output>) -> MWidget,
     private val kv: (ComponentContext, Consumer<MKV.Output>) -> MKV,
+    private val nested: (ComponentContext, Consumer<MNested.Output>) -> MNested,
 ) : MRouter, ComponentContext by componentContext {
 
     constructor(
@@ -57,6 +60,13 @@ class RouterComponent internal constructor(
                 database = database,
                 output = output
             )
+        },
+        nested = { childContext, output ->
+            NestedComponent(
+                componentContext = childContext,
+                storeFactory = storeFactory,
+                output = output
+            )
         }
     )
 
@@ -75,11 +85,13 @@ class RouterComponent internal constructor(
             is Configuration.WIDGET -> Child.Widget(
                 widget(componentContext, configuration.type, Consumer(::onWidgetOutput))
             )
+            is Configuration.Nested -> Child.Nested(nested(componentContext, Consumer(::onNestedOutput)))
         }
 
     private fun onMHomeOutput(output: MHome.Output): Unit =
         when (output) {
             is MHome.Output.Widget -> router.push(Configuration.WIDGET(output.type))
+            is MHome.Output.Nested -> router.push(Configuration.Nested)
         }
 
     private fun onMKVOutput(output: MKV.Output): Unit =
@@ -94,6 +106,11 @@ class RouterComponent internal constructor(
             is MWidget.Output.Selected -> router.push(Configuration.WIDGET(output.type))
         }
 
+    private fun onNestedOutput(output: MNested.Output): Unit =
+        when (output) {
+            is MNested.Output.Finished -> router.pop()
+        }
+
     private sealed class Configuration : Parcelable {
         @Parcelize
         object HOME : Configuration()
@@ -103,5 +120,8 @@ class RouterComponent internal constructor(
 
         @Parcelize
         data class WIDGET(val type: String) : Configuration()
+
+        @Parcelize
+        object Nested : Configuration()
     }
 }

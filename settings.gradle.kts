@@ -10,6 +10,7 @@ include(
     ":common:fun:home",
     ":common:fun:widget",
     ":common:fun:tkv",
+    ":common:fun:nested",
     ":common:router",
 
     ":common:main",
