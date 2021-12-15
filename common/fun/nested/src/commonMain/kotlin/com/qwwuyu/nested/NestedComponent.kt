@@ -3,17 +3,17 @@ package com.qwwuyu.nested
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.Router
 import com.arkivanov.decompose.router.RouterState
-import com.arkivanov.decompose.router.replaceCurrent
 import com.arkivanov.decompose.router.router
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.decompose.value.operator.map
-import com.arkivanov.essenty.parcelable.Parcelable
 import com.arkivanov.essenty.parcelable.Parcelize
 import com.arkivanov.mvikotlin.core.instancekeeper.getStore
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.badoo.reaktive.base.Consumer
 import com.badoo.reaktive.base.invoke
+import com.qwwuyu.base.ext.TypeConfiguration
 import com.qwwuyu.base.ext.asValue
+import com.qwwuyu.base.ext.frontOrPush
 import com.qwwuyu.nested.MNested.*
 import com.qwwuyu.nested.home.HomeComponent
 import com.qwwuyu.nested.me.MeComponent
@@ -52,11 +52,11 @@ class NestedComponent(
     }
 
     override fun onClicked(type: Int) {
-        router.replaceCurrent(ChildConfiguration(type))
+        router.frontOrPush(ChildConfiguration(type))
     }
 
     @Parcelize
-    private data class ChildConfiguration(val type: Int) : Parcelable
+    private data class ChildConfiguration(override val type: Int) : TypeConfiguration
 }
 
 internal val stateToModel: (NestedStore.State) -> Model = {
