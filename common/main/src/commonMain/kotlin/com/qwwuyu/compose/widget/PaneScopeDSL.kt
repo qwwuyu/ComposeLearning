@@ -5,9 +5,10 @@ import androidx.compose.runtime.Composable
 interface PaneScope {
     fun first(content: @Composable () -> Unit)
     fun second(content: @Composable () -> Unit)
+    val ctrl: (open: Boolean) -> Unit
 }
 
-internal class PaneScopeImpl : PaneScope {
+internal class PaneScopeImpl(override val ctrl: (open: Boolean) -> Unit = {}) : PaneScope {
     internal lateinit var first: (@Composable () -> Unit)
         private set
     internal lateinit var second: (@Composable () -> Unit)

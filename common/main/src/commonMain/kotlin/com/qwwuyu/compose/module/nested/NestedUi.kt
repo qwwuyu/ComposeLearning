@@ -8,17 +8,17 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.arkivanov.decompose.extensions.compose.jetbrains.Children
 import com.arkivanov.decompose.extensions.compose.jetbrains.subscribeAsState
 import com.qwwuyu.base.utils.TProvidableCompositionLocal
+import com.qwwuyu.base.utils.WLog
 import com.qwwuyu.compose.widget.MultiPane
 import com.qwwuyu.nested.MNested
 import com.qwwuyu.nested.home.MHome
+import com.qwwuyu.nested.me.MMe
 import com.qwwuyu.nested.msg.MMsg
 
 @Composable
@@ -39,12 +39,15 @@ fun NestedContent(component: MNested) {
                     first {
                         Column {
                             Button(onClick = {
+                                ctrl(false)
                                 component.onClicked(0)
                             }, modifier = Modifier.padding(8.dp)) { Text(text = "Home") }
                             Button(onClick = {
+                                ctrl(false)
                                 component.onClicked(1)
                             }, modifier = Modifier.padding(8.dp)) { Text(text = "Msg") }
                             Button(onClick = {
+                                ctrl(false)
                                 component.onClicked(2)
                             }, modifier = Modifier.padding(8.dp)) { Text(text = "Me") }
                         }
@@ -54,7 +57,7 @@ fun NestedContent(component: MNested) {
                             when (val child = it.instance) {
                                 is MNested.Child.Home -> Home(child.component)
                                 is MNested.Child.Msg -> Msg(child.component)
-                                is MNested.Child.Me -> Text("ME")
+                                is MNested.Child.Me -> Me(child.component)
                             }
                         }
                     }
@@ -112,5 +115,33 @@ private fun Msg(component: MMsg) {
 private fun TList() {
     Column(Modifier.verticalScroll(rememberScrollState())) {
         repeat(100) { Text("Text$it") }
+    }
+}
+
+@Composable
+private fun Me(component: MMe) {
+    val count = remember {
+        mutableStateOf(0L)
+    }
+
+    Button(onClick = { count.value++ }) {
+        Text(text = "Test${count.value}")
+    }
+
+    if (count.value in 2..5) {
+        LaunchedEffect(key1 = true, block = {
+            WLog.i("LaunchedEffect${count.value}")
+        })
+
+        SideEffect {
+            WLog.i("SideEffect${count.value}")
+        }
+
+        DisposableEffect(key1 = Unit, effect = {
+            WLog.i("DisposableEffect${count.value}")
+            onDispose {
+                WLog.i("onDispose${count.value}")
+            }
+        })
     }
 }

@@ -7,12 +7,22 @@ import androidx.compose.material.DropdownMenuItem
 import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import kotlinx.coroutines.launch
 
 @Composable
 actual fun MultiPane(content: PaneScope.() -> Unit) {
     val scaffoldState = rememberScaffoldState()
-    with(PaneScopeImpl().apply(content)) {
+    val scope = rememberCoroutineScope()
+    val ctrl: (open: Boolean) -> Unit = { open ->
+        scope.launch {
+            scaffoldState.drawerState.apply {
+                if (open) open() else close()
+            }
+        }
+    }
+    with(PaneScopeImpl(ctrl = ctrl).apply(content)) {
         Scaffold(
             scaffoldState = scaffoldState,
             modifier = Modifier,

@@ -31,8 +31,8 @@ class NestedComponent(
 
     private val router: Router<ChildConfiguration, Child> =
         router(
-            initialConfiguration = ChildConfiguration(type = 0),
-            handleBackButton = true,
+            initialConfiguration = ChildConfiguration(0),
+            handleBackButton = false,
             childFactory = ::resolveChild
         )
 
@@ -56,7 +56,7 @@ class NestedComponent(
     }
 
     @Parcelize
-    private data class ChildConfiguration(override val type: Int) : TypeConfiguration
+    private data class ChildConfiguration(override val type: Int) : TypeConfiguration<Int>
 }
 
 internal val stateToModel: (NestedStore.State) -> Model = {
