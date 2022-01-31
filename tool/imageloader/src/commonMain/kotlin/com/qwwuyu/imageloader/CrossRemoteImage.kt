@@ -10,3 +10,10 @@ expect fun CrossRemoteImage(
     modifier: Modifier = Modifier,
     contentScale: ContentScale = ContentScale.Fit,
 )
+
+@Composable
+expect fun CrossByteArrayImage(
+    byteArray: ByteArray,
+    modifier: Modifier = Modifier,
+    contentScale: ContentScale = ContentScale.Fit,
+)

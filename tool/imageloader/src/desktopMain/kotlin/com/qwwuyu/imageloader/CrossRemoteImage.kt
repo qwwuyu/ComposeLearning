@@ -31,3 +31,17 @@ actual fun CrossRemoteImage(
         )
     }
 }
+
+@Composable
+actual fun CrossByteArrayImage(
+    byteArray: ByteArray,
+    modifier: Modifier,
+    contentScale: ContentScale,
+) {
+    Image(
+        contentDescription = null,
+        bitmap = org.jetbrains.skia.Image.makeFromEncoded(byteArray).toComposeImageBitmap(),
+        modifier = modifier,
+        contentScale = ContentScale.Crop,
+    )
+}

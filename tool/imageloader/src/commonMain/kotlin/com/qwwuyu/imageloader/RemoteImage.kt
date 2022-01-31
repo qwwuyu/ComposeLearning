@@ -16,3 +16,16 @@ fun RemoteImage(
         contentScale = contentScale
     )
 }
+
+@Composable
+fun ByteArrayImage(
+    byteArray: ByteArray,
+    modifier: Modifier = Modifier,
+    contentScale: ContentScale = ContentScale.Fit
+) {
+    CrossByteArrayImage(
+        byteArray = byteArray,
+        modifier = modifier,
+        contentScale = contentScale
+    )
+}
