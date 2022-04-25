@@ -10,6 +10,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.arkivanov.decompose.extensions.compose.jetbrains.subscribeAsState
+import com.qwwuyu.base.platform.HorizontalScrollbar
+import com.qwwuyu.base.platform.MARGIN_SCROLLBAR
 import com.qwwuyu.base.utils.WLog
 import com.qwwuyu.widget.MWidget
 
@@ -86,12 +88,19 @@ fun TestTextCompose(title: String, onItemClicked: (type: String) -> Unit) {
 @Composable
 fun SelectTab(textList: List<String>): String {
     var text by remember { mutableStateOf("") }
-    Row(Modifier.horizontalScroll(rememberScrollState())) {
-        textList.forEach {
-            val modifier = if (text == it) Modifier
-            else Modifier.background(color = MaterialTheme.colors.primaryVariant)
-            Button(onClick = { text = it }, modifier = modifier) { Text(it) }
+    Box {
+        val scrollState = rememberScrollState()
+        Row(Modifier.horizontalScroll(scrollState).fillMaxSize().padding(top = MARGIN_SCROLLBAR)) {
+            textList.forEach {
+                val modifier = if (text == it) Modifier
+                else Modifier.background(color = MaterialTheme.colors.primaryVariant)
+                Button(onClick = { text = it }, modifier = modifier) { Text(it) }
+            }
         }
+        HorizontalScrollbar(
+            Modifier.align(Alignment.TopCenter),
+            scrollState
+        )
     }
     return text
 }

@@ -9,6 +9,7 @@ import androidx.compose.material.icons.filled.Close
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.window.Dialog
+import com.qwwuyu.base.SelectDialog
 import com.qwwuyu.compose.module.widget.SelectTab
 import com.qwwuyu.base.utils.WLog
 
@@ -16,12 +17,14 @@ import com.qwwuyu.base.utils.WLog
 actual fun WinApi() {
     Column(Modifier.fillMaxSize()) {
         val text = SelectTab(
-            listOf("DropdownMenu", "CDialog")
+            listOf("DropdownMenu", "CDialog", "CSelect=3", "CSelect=10")
         )
         Box(Modifier.weight(1f)) {
             when (text) {
                 "DropdownMenu" -> CDropdownMenu()
                 "CDialog" -> CDialog()
+                "CSelect=3" -> CSelect(3)
+                "CSelect=10" -> CSelect(10)
             }
         }
     }
@@ -54,5 +57,18 @@ fun CDialog() {
                 Icon(Icons.Default.Close, null)
             }
         }
+    }
+}
+
+/* ========================  ======================== */
+@Composable
+fun CSelect(size: Int) {
+    var isShow by remember { mutableStateOf(true) }
+    if (isShow) {
+        val selects = (0..size).map { "index$it" }.toList()
+        SelectDialog(onDismiss = {
+            isShow = false
+            WLog.i("select=$it")
+        }, selects)
     }
 }

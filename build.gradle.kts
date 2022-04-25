@@ -8,6 +8,13 @@ allprojects {
     afterEvaluate {
         configureEncoding()
     }
+
+    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile::class.java).all {
+        kotlinOptions {
+            jvmTarget = "1.8"
+            freeCompilerArgs = freeCompilerArgs + "-Xjvm-default=enable"
+        }
+    }
 }
 
 fun Project.configureEncoding() {

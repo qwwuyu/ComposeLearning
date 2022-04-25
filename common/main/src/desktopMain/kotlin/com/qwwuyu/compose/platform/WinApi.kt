@@ -18,6 +18,7 @@ import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.*
+import com.qwwuyu.base.SelectDialog
 import com.qwwuyu.base.utils.WLog
 import com.qwwuyu.compose.module.widget.SelectTab
 import kotlinx.coroutines.*
@@ -36,7 +37,8 @@ actual fun WinApi() {
         val text = SelectTab(
             listOf(
                 "Window", "Window2", "file", "splitPane",
-                "desktop open", "desktop browse", "DropdownMenu", "CDialog",
+                "desktop open", "desktop browse",
+                "DropdownMenu", "CDialog", "CSelect=3", "CSelect=10",
             )
         )
         Box(Modifier.weight(1f)) {
@@ -52,6 +54,8 @@ actual fun WinApi() {
                 "desktop browse" -> Desktop.getDesktop().browse(URI.create("www.baidu.com"))
                 "DropdownMenu" -> CDropdownMenu()
                 "CDialog" -> CDialog()
+                "CSelect=3" -> CSelect(3)
+                "CSelect=10" -> CSelect(10)
             }
         }
     }
@@ -298,4 +302,18 @@ private fun ApplicationScope.ApplicationTray(state: TrayState) {
         state = state,
         tooltip = "hint qwwuyu",
         menu = { })
+}
+
+
+/* ========================  ======================== */
+@Composable
+fun CSelect(size: Int) {
+    var isShow by remember { mutableStateOf(true) }
+    if (isShow) {
+        val selects = (0..size).map { "index$it" }.toList()
+        SelectDialog(onDismiss = {
+            isShow = false
+            WLog.i("select=$it")
+        }, selects)
+    }
 }
