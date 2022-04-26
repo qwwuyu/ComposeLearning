@@ -44,6 +44,7 @@ fun WidgetContent(component: MWidget) {
                 "CImage" -> CImage.main()
                 "CompositionLocalProvider" -> CLocal.main()
                 "CCrash" -> CTest.main()
+                "CEventBus" -> CEventBus.main()
                 else -> TestScreenCompose(component::onItemClicked, component::onTKV)
             }
         }
@@ -69,6 +70,7 @@ fun TestScreenCompose(onItemClicked: (type: String) -> Unit, onTKV: () -> Unit) 
             "CImage",
             "CompositionLocalProvider",
             "CCrash",
+            "CEventBus",
         )) {
             TestTextCompose(text, onItemClicked)
         }
