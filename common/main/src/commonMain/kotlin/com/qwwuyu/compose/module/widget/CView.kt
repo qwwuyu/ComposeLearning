@@ -22,8 +22,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.qwwuyu.compose.platform.Res
 import com.qwwuyu.base.platform.imageResource
+import com.qwwuyu.compose.platform.Res
 
 class CView {
     companion object {
@@ -131,6 +131,23 @@ fun CViewMain() {
             overlineText = { Text("Overline text") },
             singleLineSecondaryText = false
         )
+
+        Title("TabRow")
+        TabRow(0, Modifier.height(40.dp),
+            backgroundColor = Color.White,
+            contentColor = MaterialTheme.colors.primary,
+            divider = { TabRowDefaults.Divider(color = Color.White) }) {
+            for (current in (0..2)) {
+                Tab(0 == current,
+                    selectedContentColor = MaterialTheme.colors.primaryVariant,
+                    unselectedContentColor = MaterialTheme.colors.secondary,
+                    onClick = { },
+                    content = { Text("$current") }
+                )
+            }
+        }
+
+        Spacer(Modifier.height(20.dp))
     }
 }
 
